@@ -5,10 +5,8 @@ Created on Tue Dec 26 21:37:58 2017
 @author: vincentS
 """
 
-class Control(object):
-    state='NULL'
-    
-    def _init_(self, model, view):
+class Control(object):    
+    def __init__(self, model, view):
         self.model = model
         self.view = view
         self.state = 'NULL'
@@ -21,4 +19,4 @@ class Control(object):
     
     def start(self):
         self.state = 'IDLE'
-        self.view.stateHasChange(self.state)
+        self.view.stateHasChange()
