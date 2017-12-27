@@ -4,8 +4,8 @@ Created on Sun Dec 24 22:07:48 2017
 
 @author: Danny
 """
-
-import time;
+import random
+import time
 
 class Model:
     speed = 5
@@ -35,7 +35,7 @@ class GameModel(Model):
         self.falling_block = []
         
         #0改隨機
-        self.falling_class = 0 # 1 -> 長條,2 -> L,3 -> 反L,4 -> z,5 -> 反z,6 -> T,7 -> 田
+        self.falling_class = random.randint(1,8) # 1 -> 長條,2 -> L,3 -> 反L,4 -> z,5 -> 反z,6 -> T,7 -> 田
         self.board = (8,15)
         self.Play()
         
