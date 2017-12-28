@@ -1,18 +1,15 @@
-import tkinter as tk
-import controller,model
+from tkinter import *
 
-class view(object):
-    window=tk.Tk()
-    window.title('Tetris Battle')
-    window.geometry('400x500')
-    tetrisController=controller()
-    state=''
-    play=tk.Button(window,text='play',commond=tetrisController.input('PLAY'))
-    setting=tk.Button(window,text='setting',commond=tetrisController.input('SET'))
-    pause=tk.Button(window,text='pause',commond=tetrisController.input('PAUSE'))
-    esc=tk.Button(window,text='end',commond=tetrisController.input('ESC'))
-    def __init__(self):
+
+class view(Frame):
+  
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        
+        self.grid()
         self.newState = 'IDLE'
+        self.start()
+        #self.stateHasChanged()
 
     def stateHasChanged(self,model,newState):
         self.gameModel=model
@@ -33,11 +30,14 @@ class view(object):
        
     
     def start(self):
-        l=tk.Label(self.window,text='Tetris Soft.Engi')
-        self.l.pack()
-        self.play.pack()
-        self.setting.pack()
-        self.esc.pack() 
+        self.inputText = Label(self,text="tetris")
+        self.inputText.grid(row=0, column=0)
+        
+        self.play = Button(self,text="play")
+        self.play.grid(row=0, column=0)
+        self.setting = Button(self,text="setting")
+        self.setting.grid()
+         
     def setting(self):
         
         self.setting.pack()
@@ -48,8 +48,13 @@ class view(object):
         self.play.pack()
         
         
-    window.mainloop()    
-a=view()
-a.getUserInput()
+   
+if __name__ == '__main__':
+    window = Tk()
+    window.title('Tetris Battle')
+    window.geometry('400x500')
+    game = view(master=window)
+    game.mainloop()
+
 
     
