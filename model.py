@@ -140,12 +140,12 @@ class GameModel(Model):
         
     def Play(self):
         exact_Speed = 1 / self.speed
-        while self.state == "PLAY":
-            time.sleep(exact_Speed)
-            if self.Fall_Down() == "Lose":
-                self.Set_State("IDLE")
-                return
-        return
+        #while self.state == "PLAY":
+        time.sleep(exact_Speed)
+        if self.Fall_Down() == "Lose":
+            self.Set_State("IDLE")
+            return
+        #return
         
 a = GameModel()
 a.Fall_Down()
