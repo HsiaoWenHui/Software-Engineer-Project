@@ -6,6 +6,7 @@ Created on Tue Dec 26 21:37:58 2017
 """
 
 class Control(object):    
+    #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
     def __init__(self, model, view):
         self.model = model
         self.view = view
@@ -19,4 +20,6 @@ class Control(object):
     
     def start(self):
         self.state = 'IDLE'
-        self.view.stateHasChange()
+        self.model.stateHasChange(self.state)
+    
+    def 
