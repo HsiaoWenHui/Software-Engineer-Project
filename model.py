@@ -30,15 +30,34 @@ class Model:
         self.speed = lv
         self.state = "IDLE"
         
-    def Set_State(self, key_In):
-        if key_In == "":
-            print(0)
-
-        elif key_In =="":
-            print(1)
-
+    def Set_State(self, newState):
+        if newState == "PLAY":
+            self.state = "PLAY"
+            if self.Play():
+                self.Set_State("Check")
+            
+        elif newState =="Check":
+            self.state = "Check"
+            if self.Check_Frozen():
+                self.Set_State("PLAY")
+            else:
+                self.Set_State("OVER")
+            
+        elif newState == "IDLE":
+            self.state = "IDLE"
+            
+        elif newState == "SET":
+            self.state = "SET"
+            self.Change_Speed()
+            
+        elif newState == "PAUSE":
+            self.state = "PAUSE"
+            
+        elif newState == "OVER":
+            self.state = "OVER"
+            
         else:
-            print(2)
+            return
     def Change_Speed(self, lv):
         self.speed = lv
         
@@ -89,6 +108,7 @@ class GameModel(Model):
     def Check_Frozen(self):
 #        for ... 所有:
 #            if 有接觸:
+#                self.New_Block()
 #                self.Check_Erase()
 #                return self.Check_End()
         return True#遊戲未結束
@@ -100,7 +120,7 @@ class GameModel(Model):
     def Check_End(self):
         #改state
         print("Check_End")
-        return True
+        return False
         
 
     def New_Block(self):
@@ -134,18 +154,14 @@ class GameModel(Model):
         temp_block =[]
         for index in self.falling_block:
             temp_block.append([index[0], index[1] + 1, index[2]])
-            print(temp_block)
-        if not self.Check_Frozen():
-            return "Lose"
+        self.falling_block = temp_block
+        return True
         
     def Play(self):
         exact_Speed = 1 / self.speed
         #while self.state == "PLAY":
         time.sleep(exact_Speed)
-        if self.Fall_Down() == "Lose":
-            self.Set_State("IDLE")
-            return
-        #return
+        return self.Fall_Down()
         
 a = GameModel()
 a.Fall_Down()
