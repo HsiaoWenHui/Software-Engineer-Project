@@ -7,43 +7,45 @@ Created on Tue Dec 26 21:37:58 2017
 
 class Control(object):    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
-    def __init__(self):
-#        self.model = model
-#        self.view = view
+    def __init__(self, model, view):
+        self.model = model
+        self.view = view
         self.flag = False
         self.state = "NULL"
     
-#    def input(self, event):
-#        if self.state == "PLAY":
-#            self.model.gameinput(event)
-#        elif self.state == "SET":
-#            self.model.input(event)
+    def gameinput(self, event):
+        if event == "LEFT":
+            self.model.Move()
+        if event == "RIGHT":
+            self.model.Move()
+        if event == "DOWN":
+            self.model.Move()
+        if event == "ROTATE":
+            self.model.Turn()
+
+#    def setinput(self. event):
 
     def setstate(self, state):
         self.state = state
         print (self.state)
- #       self.model.Set_State(self.state)
+        self.model.Set_State(self.state)
 
+    #檢查掉落結束
     def finishcheck(self):
-        return True
-#        return self.model.finishflag()
+        return self.model.finishflag()
 
     def start(self):
         self.setstate("IDLE")
-        
-    def finish(self):
-        return self.flag
     
     def play(self):
         self.setstate("PLAY")
         while self.state == "PLAY":
-            if self.finishcheck:
+            if self.finishcheck():
                 self.setstate("CHECK")
                 while self.state == "CHECK":
-                    if self.finishcheck:
+                    if self.finishcheck():
                         self.setstate("PLAY")
-#            if not self.model.Check_Frozen():
-            if self.finish():
+            if self.model.Check_Frozen():
                 self.setstate("OVER")
 
     def pause(self):
