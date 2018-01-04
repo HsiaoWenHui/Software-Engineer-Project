@@ -9,13 +9,13 @@ import time
 
 # 定義磚塊.
 brick_dict = {
-    "10": ( 4, 8, 9,13), "11": ( 9,10,12,13),   # N1.
-    "20": ( 5, 8, 9,12), "21": ( 8, 9,13,14),   # N2.
-    "30": ( 8,12,13,14), "31": ( 4, 5, 8,12), "32": (8,  9, 10, 14), "33": (5,  9, 12, 13), # L1.
-    "40": (10,12,13,14), "41": ( 4, 8,12,13), "42": (8,  9, 10, 12), "43": (4,  5,  9, 13), # L2.
-    "50": ( 9,12,13,14), "51": ( 4, 8, 9,12), "52": (8,  9, 10, 13), "53": (5,  8,  9, 13), # T.
-    "60": ( 8, 9,12,13),    # O.
-    "70": (12,13,14,15), "71": ( 1, 5, 9,13)    #I.
+        10: [ 4, 8, 9,13], 11: [ 9,10,12,13],   # N1.
+        20: [ 5, 8, 9,12], 21: [ 8, 9,13,14],   # N2.
+        30: [ 8,12,13,14], 31: [ 4, 5, 8,12], 32: [8,  9, 10, 14], 33: [5,  9, 12, 13], # L1.
+        40: [10,12,13,14], 41: [ 4, 8,12,13], 42: [8,  9, 10, 12], 43: [4,  5,  9, 13], # L2.
+        50: [ 9,12,13,14], 51: [ 4, 8, 9,12], 52: [8,  9, 10, 13], 53: [5,  8,  9, 13], # T.
+        60: [ 8, 9,12,13],    # O.
+        70: [12,13,14,15], 71: [ 1, 5, 9,13]    #I.
 }
 # 方塊編號(1~7).
 brick_id = 1
@@ -67,12 +67,21 @@ class Model:
 class GameModel(Model):
     def __init__(self, lv = 5):
         super().__init__(lv)
-        self.frozen_block = []#block [x,y,color]
         self.falling_block = []
+        self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
         
-        #0改隨機
-        self.falling_class = random.randint(1,8) # 1 -> 長條,2 -> L,3 -> 反L,4 -> z,5 -> 反z,6 -> T,7 -> 田
-        self.board = (8,15)
+        self.board = (8,15)# x,y
+        self.board_state = []
+        
+        #all board state
+        size = self.board[0] * self.board[1]
+        for i in range(0,size):
+            self.board_state.append(False)#nothing
+            
+        #falling now
+        for j in self.falling_block:
+            self.board_state[j] = True#something exist
+            
         self.Play()
         
     def Turn(self):
@@ -105,61 +114,53 @@ class GameModel(Model):
         if not self.Check_Frozen():
             return "Lose"
             
-    def Check_Frozen(self):
-#        for ... 所有:
-#            if 有接觸:
-#                self.New_Block()
-#                self.Check_Erase()
-#                return self.Check_End()
-        return True#遊戲未結束
+    def Check_Frozen(self, temp):
+        for i in range(0,4):
+            if self.board_state[temp[i]] == True:
+                return True#hit
+        return False#not hit
                
     def Check_Erase(self):
+        for block in self.falling_block:
+            x = block % self.board[0]
+            y = block % self.board[1]
+            start = block - x
         print("Erase")
         
 
     def Check_End(self):
         #改state
+        
         print("Check_End")
         return False
         
 
     def New_Block(self):
-        self.falling_class = 0
-        if self.falling_class == 1:
-            print(1)
-
-        elif self.falling_class == 2:
-            print(2)
-
-        elif self.falling_class == 3:
-            print(3)
-
-        elif self.falling_class == 4:
-            print(4)
-
-        elif self.falling_class == 5:
-            print(5)
-
-        elif self.falling_class == 6:
-            print(6)
-
-        elif self.falling_class == 7:
-            print(7)
-
-        else:
-            print("error")
+        self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
+        self.falling_block = brick_dict[self.falling_class]
+        for i in range(0,4):
+            self.board_state[self.falling_block[i]] = True
             
     def Fall_Down(self):
-        self.falling_block = [[1,1,1],[1,2,1],[1,3,1],[1,4,1]]
-        temp_block =[]
-        for index in self.falling_block:
-            temp_block.append([index[0], index[1] + 1, index[2]])
-        self.falling_block = temp_block
-        return True
+        exist = True
+        temp = []#next place
+        temp.append(self.falling_block[0] + self.board[0])
+        temp.append(self.falling_block[1] + self.board[0])
+        temp.append(self.falling_block[2] + self.board[0])
+        temp.append(self.falling_block[3] + self.board[0])
+        
+        if self.Check_Frozen(temp):#T hit , F not hit
+            self.Check_Erase()
+            exist = self.Check_End()# T exist, F die
+        else:
+            self.falling_block = temp#move down
+            for i in self.falling_block:
+                self.board_state[i] = True#something exist
+            
+        return exist
         
     def Play(self):
         exact_Speed = 1 / self.speed
-        #while self.state == "PLAY":
         time.sleep(exact_Speed)
         return self.Fall_Down()
         
