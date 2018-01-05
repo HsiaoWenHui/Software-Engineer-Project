@@ -29,7 +29,7 @@ class Model:
     def __init__(self, lv = 5):
         self.speed = lv
         self.state = "IDLE"
-        self.finishflag=false;
+        self.finishflag=False;
         
     def Set_State(self, newState):
         if newState == "PLAY":
