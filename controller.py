@@ -4,11 +4,12 @@ Created on Tue Dec 26 21:37:58 2017
 
 @author: vincentS
 """
-
-class Control(object):    
+from enum import Flag
+import time
+class Control():    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
-    def __init__(self, model, view):
-        self.model = model
+    def __init__(self, view):
+        #self.model = model
         self.view = view
         self.flag = False
         self.state = "NULL"
@@ -27,26 +28,36 @@ class Control(object):
 
     def setstate(self, state):
         self.state = state
+        self.view.changeView(self.state)
         print (self.state)
-        self.model.Set_State(self.state)
+
+ #       self.model.Set_State(self.state)
 
     #檢查掉落結束
+#    def finishcheck(self):
+ #       return self.model.finishflag()
     def finishcheck(self):
-        return self.model.finishflag()
+        return True
+    def finish(self):
+        return self.flag
 
     def start(self):
         self.setstate("IDLE")
     
     def play(self):
         self.setstate("PLAY")
-        while self.state == "PLAY":
+        print("while playing")
+        """while self.state == "PLAY":
             if self.finishcheck():
+                print ("checking")
                 self.setstate("CHECK")
                 while self.state == "CHECK":
                     if self.finishcheck():
                         self.setstate("PLAY")
-            if self.model.Check_Frozen():
+#            if self.model.Check_Frozen():
+            if self.finish():
                 self.setstate("OVER")
+            time.sleep(10)"""
 
     def pause(self):
         self.setstate("PAUSE")
@@ -56,19 +67,3 @@ class Control(object):
 
 
 
-a = Control()
-state = a.state
-a.start()
-while a.state != "OVER":
-    b = input("input:")
-    print (b)
-    if int(b) == 1:
-        a.play()
-    if int(b) == 2:
-        a.pause()
-    if int(b) == 3:
-        a.setting()
-    if int(b) == 4:
-        a.flag = True
-    if int(b) == 5:
-        break
