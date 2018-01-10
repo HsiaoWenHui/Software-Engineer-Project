@@ -75,6 +75,7 @@ class GameModel(Model):
         self.board = (8,15)# x,y
         self.board_state = []#print mode
         self.frozen_board = []#frozen check
+        self.point = 0
         
         #all board state
         size = self.board[0] * self.board[1]
@@ -393,14 +394,25 @@ class GameModel(Model):
             while not (self.frozen_board[tmp] == 0):
                 i += 1
                 tmp = x + i
-            
-                if i >= self.board[0]:
-                    erase_row.append(x)
-                    break
-            
-                
-            
-        print("Erase")
+            if i >= self.board[0]:
+                erase_row.append(x)
+
+        #some row need to erase, move down upper block
+        if erase_row:
+            temp_board = self.frozen_board
+            for rowX in erase_row:
+                i = 0
+                while i < rowX:
+                    temp_board[i+self.board[0]] = temp_board[i]
+
+        if len(erase_row) == 1:
+            self.point += 10
+        elif len(erase_row) == 2:
+            self.point += 30
+        elif len(erase_row) == 3:
+            self.point += 70
+        else:
+            self.point += 150
         
 
     def Check_End(self):
