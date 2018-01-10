@@ -68,7 +68,9 @@ class GameModel(Model):
     def __init__(self, lv = 5):
         super().__init__(lv)
         self.falling_block = []
-        self.falling_class = 0
+        self.falling_class =random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
+        for value in dict[self.falling_class].items():
+            self.falling_block.append(value)
         
         self.board = (8,15)# x,y
         self.board_state = []#print mode
@@ -84,26 +86,161 @@ class GameModel(Model):
         self.Play()
         
     def Turn(self):
-        if self.falling_class == 1:
-            print(1)
+        temp_Falling=list(self.falling_block) #複製原始block位置
+        if self.falling_class == 10 :
+            temp_Falling[1]=temp_Falling[1]-7
+            temp_Falling[2]=temp_Falling[2]-2
+            temp_Falling[3]=temp_Falling[3]-9
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class== 11:
+            temp_Falling[1]=temp_Falling[1]+7
+            temp_Falling[2]=temp_Falling[2]+2
+            temp_Falling[3]=temp_Falling[3]+9
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class-=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+             return self.falling_block[i]
+            
+        elif self.falling_class== 20:
+            temp_Falling[0]=temp_Falling[0]-1
+            temp_Falling[1]=temp_Falling[1]-7
+            temp_Falling[3]=temp_Falling[3]-6
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 21:
+            temp_Falling[0]=temp_Falling[0]+1
+            temp_Falling[1]=temp_Falling[1]+7
+            temp_Falling[3]=temp_Falling[3]+6
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class-=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
 
-        elif self.falling_class == 2:
-            print(2)
+        elif self.falling_class == 30:
+            temp_Falling[1]=temp_Falling[1]-7
+            temp_Falling[2]=temp_Falling[2]-1
+            temp_Falling[3]=temp_Falling[3]+6
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 31:
+            temp_Falling[0]=temp_Falling[0]-7
+            temp_Falling[1]=temp_Falling[1]-7
+            temp_Falling[2]=temp_Falling[2]-1
+            temp_Falling[3]=temp_Falling[3]+6
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 32:
+            temp_Falling[0]=temp_Falling[0]+2
+            temp_Falling[1]=temp_Falling[1]+9
+            temp_Falling[2]=temp_Falling[2]+15
+            temp_Falling[3]=temp_Falling[3]+8
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 33:
+            temp_Falling[0]=temp_Falling[0]-1
+            temp_Falling[1]=temp_Falling[1]+1
+            temp_Falling[2]=temp_Falling[2]+7
+            temp_Falling[3]=temp_Falling[3]-7
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class-=3
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 40:
+            temp_Falling[0]=temp_Falling[0]-1
+            temp_Falling[1]=temp_Falling[1]+1
+            temp_Falling[2]=temp_Falling[2]+8
+            temp_Falling[3]=temp_Falling[3]+8
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 41:
+            temp_Falling[1]=temp_Falling[1]-7
+            temp_Falling[2]=temp_Falling[2]-14
+            temp_Falling[3]=temp_Falling[3]-9
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 42:
+            temp_Falling[2]=temp_Falling[2]+7
+            temp_Falling[3]=temp_Falling[3]+9
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            
+        elif self.falling_class == 43:
+            temp_Falling[0]=temp_Falling[0]+1
+            temp_Falling[1]=temp_Falling[1]-6
+            temp_Falling[2]=temp_Falling[2]-1
+            temp_Falling[3]=temp_Falling[3]-8
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class-=3
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            print(43)
+            
+        elif self.falling_class == 50:
+            temp_Falling[1]=temp_Falling[1]+7
+            temp_Falling[2]=temp_Falling[2]+7
+            temp_Falling[3]=temp_Falling[3]+7
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+            print(50)
+            
+        elif self.falling_class == 51:
+            print(51)
+            
+        elif self.falling_class == 52:
+            print(52)
+            
+        elif self.falling_class == 53:
+            print(53)
+            
+        elif self.falling_class == 60:
+            return self.falling_class
+        
+        elif self.falling_class == 70:
 
-        elif self.falling_class == 3:
-            print(3)
-
-        elif self.falling_class == 4:
-            print(4)
-
-        elif self.falling_class == 5:
-            print(5)
-
-        elif self.falling_class == 6:
-            print(6)
-
-        elif self.falling_class == 7:
-            print(7)
+            print(70)
+            
+        elif self.falling_class == 71:
+            print(71)
 
         else:
             print("error")
