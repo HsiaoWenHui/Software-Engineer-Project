@@ -23,7 +23,7 @@ brick_id = 1
 brick_state = 0
 # 下一個磚塊編號(1~7).
 brick_next_id = 1
-
+board_long=14
 class Model:
     speed = 5
     def __init__(self, lv = 5):
@@ -90,6 +90,8 @@ class GameModel(Model):
         temp_Falling=list(self.falling_block) #複製原始block位置
         outCheck=True
         if self.falling_class == 10 :
+            if(temp_Falling[0]%8==6)
+                   outCheck=False              
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-2
             temp_Falling[3]=temp_Falling[3]-9
@@ -97,8 +99,9 @@ class GameModel(Model):
                 for j in range(4):
                     if(j==i):
                         outCheck=False
-            if(temp_Falling[0]%8==6)#第七行所占為七八行，無法轉入第九行
-                outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -113,6 +116,10 @@ class GameModel(Model):
                 for j in range(4):
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                if((i/8)>board_long):
+                    outCheck=False
+
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=1
@@ -120,6 +127,8 @@ class GameModel(Model):
              return self.falling_block[i]
             
         elif self.falling_class== 20:
+            if(temp_Falling[0]%8==7)
+                   outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[3]=temp_Falling[3]-6
@@ -127,8 +136,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
-            if(temp_Falling[0]%8==7)
-                   outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -142,6 +152,9 @@ class GameModel(Model):
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -157,6 +170,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -164,6 +180,8 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 31:
+            if(temp_Falling[0]%8==0):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]-7
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-1
@@ -171,6 +189,9 @@ class GameModel(Model):
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -187,6 +208,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -194,6 +218,8 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 33:
+            if(temp_Falling[0]%8==7):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]+1
             temp_Falling[2]=temp_Falling[2]+7
@@ -201,6 +227,9 @@ class GameModel(Model):
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -217,19 +246,27 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
             return self.falling_block[i]
             
-        elif self.falling_class == 41:    
+        elif self.falling_class == 41:
+            if(temp_Falling[0]%8==6):
+                outCheck=False
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-14
             temp_Falling[3]=temp_Falling[3]-9
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -244,6 +281,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -251,6 +291,8 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 43:
+            if(temp_Falling[0]%8==0):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[1]=temp_Falling[1]-6
             temp_Falling[2]=temp_Falling[2]-1
@@ -258,6 +300,9 @@ class GameModel(Model):
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -273,6 +318,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -280,11 +328,18 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 51:
+            if(tempFalling[0]%8==1):
+                outCheck=False
+            elif(tempFalling[0]%8==0):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[3]=temp_Falling[3]+1
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -301,6 +356,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -308,11 +366,18 @@ class GameModel(Model):
             return self.falling_block[i]
 
         elif self.falling_class == 53:
+            if(temp_Falling[0]%8==6)
+                outCheck=False
+            elif(temp_Falling[0]%8==7)
+                outCheck=False
             temp_Falling[1]=temp_Falling[1]-6
             temp_Falling[2]=temp_Falling[2]-6
             for i in self.frozen_board: #檢查是否在冷凍版上
                 for j in temp_Falling:
                     if(j==i):
+                        outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
                         outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
@@ -324,6 +389,12 @@ class GameModel(Model):
             return self.falling_class
         
         elif self.falling_class == 70:
+            if(temp_Falling[0]%8==0):
+                outCheck=False
+            elif(temp_Falling[0]%8==6):
+                outCheck=False
+            elif(temp_Falling[0]%8==7):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]-8
             temp_Falling[2]=temp_Falling[2]-15
@@ -332,7 +403,10 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
+            if(outCheck) #若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
@@ -347,6 +421,9 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
+            for i in temp_Falling:
+                    if((i/8)>board_long):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=1
@@ -355,6 +432,7 @@ class GameModel(Model):
 
         else:
             print("error")
+
             
     def Move(self):
         
