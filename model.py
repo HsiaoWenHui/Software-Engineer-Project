@@ -364,9 +364,9 @@ class GameModel(Model):
             return self.falling_block[i]
 
         elif self.falling_class == 53:
-            if(temp_Falling[0]%8==6)
+            if(temp_Falling[0]%8==6):
                 outCheck=False
-            elif(temp_Falling[0]%8==7)
+            elif(temp_Falling[0]%8==7):
                 outCheck=False
             temp_Falling[1]=temp_Falling[1]-6
             temp_Falling[2]=temp_Falling[2]-6
@@ -404,7 +404,7 @@ class GameModel(Model):
             for i in temp_Falling:
                 if((i/8)>board_long):
                     outCheck=False
-            if(outCheck) #若沒有撞到frozen或是邊緣則可進行旋轉
+            if(outCheck): #若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
