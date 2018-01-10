@@ -83,18 +83,14 @@ class Application(tkinter.Frame):
         
         self.score.config(text="score : "+mod.point)
         self.score.place(x=0,y=0,anchor='nw')
-        """
       
-        board[3][4]=1
-        board[3][5]=2
-        board[2][5]=3
-        board[4][5]=4
-        board[14][5]=5
-        board[14][4]=5
-        board[14][3]=5
-        board[14][2]=5
-        board[14][1]=5"""
-        self.board=mod.board_state
+        col=0
+        row=0
+        for i in range(0,120):
+            row=i/8
+            col=i%8
+            self.board[row][col]=mod.board_state[i]
+        
         for i in range(0,15):
             for j in range(0,8):
                 if self.board[i][j]==1:
