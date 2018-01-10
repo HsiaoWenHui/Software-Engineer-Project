@@ -496,14 +496,6 @@ class GameModel(Model):
             self.point += 70
         else:
             self.point += 150
-        
-
-    def Check_End(self):
-        #改state
-        
-        print("Check_End")
-        return False
-        
 
     def New_Block(self):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
