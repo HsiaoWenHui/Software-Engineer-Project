@@ -223,7 +223,9 @@ class GameModel(Model):
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
             return self.falling_block[i]
             
-        elif self.falling_class == 41:    
+        elif self.falling_class == 41:
+            if(temp_Falling[0]%8==6):
+                outCheck=False
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-14
             temp_Falling[3]=temp_Falling[3]-9
@@ -251,6 +253,8 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 43:
+            if(temp_Falling[0]%8==0):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[1]=temp_Falling[1]-6
             temp_Falling[2]=temp_Falling[2]-1
@@ -280,9 +284,9 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 51:
-            if(tempFalling[0]%8==1)
+            if(tempFalling[0]%8==1):
                 outCheck=False
-            elif(tempFalling[0]%8==0)
+            elif(tempFalling[0]%8==0):
                 outCheck=False
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[3]=temp_Falling[3]+1
@@ -332,11 +336,11 @@ class GameModel(Model):
             return self.falling_class
         
         elif self.falling_class == 70:
-            if(temp_Falling[0]%8==0)
+            if(temp_Falling[0]%8==0):
                 outCheck=False
-            elif(temp_Falling[0]%8==6)
+            elif(temp_Falling[0]%8==6):
                 outCheck=False
-            elif(temp_Falling[0]%8==7)
+            elif(temp_Falling[0]%8==7):
                 outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]-8
