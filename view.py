@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import tkinter
+import tkinter.messagebox
 #from distutils.dist import command_re
 #from tkinter.constants import ANCHOR
 from PIL.ImageTk import PhotoImage
@@ -41,6 +42,7 @@ class Application(tkinter.Frame):
         self.panel2=tkinter.Radiobutton(text='2',font=('Arial,100'),variable=self.panel,value='2',command=self.panelchange,bg="black",fg="white")
         self.panel3=tkinter.Radiobutton(text='3',font=('Arial,100'),variable=self.panel,value='3',command=self.panelchange,bg="black",fg="white")
         self.changPanel=tkinter.Label(master,font=('Arial,80'),width=15,height=2,text="Choose Panel",bg="black",fg="white")
+        
         self.master.bind('<Left>', self.left_key)
         self.master.bind('<Right>', self.right_key)
         self.master.bind('<Up>', self.up_key)
@@ -49,26 +51,27 @@ class Application(tkinter.Frame):
         self.startFrame()
 
     def changeView(self,state):
-            print("enter changeview")
+            self.clear()
+            print("change"+self.state)
             self.state=state
             if state=="IDLE":
-                self.clear()
+                
                 self.startFrame()
             
             elif(state=="PLAY"):
-                self.clear()
+             
                 self.playFrame()
                 
             elif(state=='SET'):
-                self.clear()
+            
                 self.setFrame()
                 
             elif(state=='PAUSE'):
-                self.clear()
+             
                 self.pauseFrame()
                 
             elif(state=='OVER'):
-                self.overFrame()
+                self.over()
                 
             else:
                 self.startFrame()
@@ -81,19 +84,22 @@ class Application(tkinter.Frame):
         self.inputText.place(x=176,y=100,anchor='n')
         
     def updateGame(self):
-        
-        self.score.config(text="score : "+self.mod.point)
+        #print("update")
+        self.score.config(text="score : "+str(self.mod.point))
         self.score.place(x=0,y=0,anchor='nw')
       
         col=0
         row=0
+       # print(self.mod.board_state)
         for i in range(0,120):
-            row=i/8
-            col=i%8
+            row=int(i/8)
+            col=int(i%8)
             self.board[row][col]=self.mod.board_state[i]
+            
         
         for i in range(0,15):
             for j in range(0,8):
+                square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#FFFFF3")
                 if self.board[i][j]==1:
                     square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#E53A40")#red
                 elif self.board[i][j]==2:
@@ -110,12 +116,12 @@ class Application(tkinter.Frame):
                     square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#F17F42")#orange
                 else:
                     square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40)
+                #print("test"+str(self.board[i][j]))
     
     def playFrame(self):
         
         
         self.canvas.place(x=18,y=45,width=320,height=600,anchor='nw')
-        
         self.pauseButton.place(x=176,y=5,anchor='n')
         outside=self.canvas.create_rectangle(0,0,320,600)#每格40
         
@@ -135,10 +141,7 @@ class Application(tkinter.Frame):
         self.panel3.place(x=226,y=200,anchor='center')
         self.cancelButton.config(image='',text="back",width=5,height=5,bg="black",fg="white")
         self.cancelButton.place(x=176,y=300,anchor='center')
-    def overFrame(self):
-        
-        self.inputText.config(text="over")   
-        
+    
     def clear(self):
         self.settingButton.config(image=self.setImage,width=50,height=50)
         self.cancelButton.config(image=self.cancelImage,width=80,height=80,bg="#0096E6")
@@ -161,8 +164,10 @@ class Application(tkinter.Frame):
         return self.gamestate
         self.gamestate=""
     def over(self):
+        self.state="IDLE"
         tkinter.messagebox.showinfo("Tetris", "Game Over")
-        self.state='OVER'
+        
+        
     def play(self):
         print("viewPlay")
         self.state='PLAY'
