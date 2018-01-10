@@ -502,59 +502,62 @@ class GameModel(Model):
             
     def Check_Frozen(self, temp):
         board_size = 120
+        count = 0
         for i in temp:
             if i < board_size:
-                if self.frozen_board[i] != 0:#hit block input into frozen
-                    state = int(self.falling_class / 10)
-                    for blc in self.falling_block:
-                        self.frozen_board[blc] = state
-                    return True
-                
+                if self.frozen_board[i] != 0:
+                    #hit block input into frozen
+                    count += 1
             else:#hit boarder
-                state = int(self.falling_class / 10)
-                for blc in self.falling_block:
-                    self.frozen_board[blc] = state
-                return True
-        return False
+                count += 1
+                
+        if count == 0:
+            return False
+        else:
+            state = int(self.falling_class / 10)
+            for blc in self.falling_block:
+                self.frozen_board[blc] = state
+            return True
     
                
     def Check_Erase(self):
-        chk_rowStart = []
-        for block in self.falling_block:
-            x = block % 8
-            start = block - x
-            if not (start in chk_rowStart):
-                chk_rowStart.append(start)#store all row start need to check
-                
-        erase_row = []
-        for x in chk_rowStart:
-            i = 0
-            tmp = x
-            while not (self.frozen_board[tmp] == 0):
-                i += 1
-                tmp = x + i
-            if i >= self.board[0]:
-                erase_row.append(x)
-
-        #some row need to erase, move down upper block
-        if erase_row:
-            temp_board = self.frozen_board
-            for rowX in erase_row:
-                i = 0
-                while i < rowX:
-                    temp_board[i + 8] = temp_board[i]
-
-
-        if len(erase_row) == 1:
-            self.point += 10
-        elif len(erase_row) == 2:
-            self.point += 30
-        elif len(erase_row) == 3:
-            self.point += 70
-        elif len(erase_row) == 4:
-            self.point += 150
-        else:
-            return
+        print(1)
+#        chk_rowStart = []
+#        for block in self.falling_block:
+#            x = block % 8
+#            start = block - x
+#            if not (start in chk_rowStart):
+#                chk_rowStart.append(start)#store all row start need to check
+#                
+#        erase_row = []
+#        for x in chk_rowStart:
+#            i = 0
+#            tmp = x
+#            while not (self.frozen_board[tmp] == 0):
+#                i += 1
+#                tmp = x + i
+#            if i >= self.board[0]:
+#                erase_row.append(x)
+#
+#        #some row need to erase, move down upper block
+#        if erase_row:
+#            temp_board = self.frozen_board
+#            for rowX in erase_row:
+#                i = 0
+#                while i < rowX:
+#                    temp_board[i + 8] = temp_board[i]
+#
+#
+#        if len(erase_row) == 1:
+#            self.point += 10
+#        elif len(erase_row) == 2:
+#            self.point += 30
+#        elif len(erase_row) == 3:
+#            self.point += 70
+#        elif len(erase_row) == 4:
+#            self.point += 150
+#        else:
+#            return
 
 
     def New_Block(self):
