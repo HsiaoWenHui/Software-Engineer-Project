@@ -164,7 +164,9 @@ class Application(tkinter.Frame):
     def gameinput(self,inputstate):
         return self.gamestate
         self.gamestate=""
-    
+    def over(self):
+        tkinter.messagebox.showinfo("Tetris", "Game Over")
+        self.state='OVER'
     def play(self):
         self.state='PLAY'
         
