@@ -9,13 +9,13 @@ import time
 
 # 定義磚塊.
 brick_dict = {
-        10: [ 4, 8, 9,13], 11: [ 9,10,12,13],   # N1.
-        20: [ 5, 8, 9,12], 21: [ 8, 9,13,14],   # N2.
-        30: [ 8,12,13,14], 31: [ 4, 5, 8,12], 32: [8,  9, 10, 14], 33: [5,  9, 12, 13], # L1.
-        40: [10,12,13,14], 41: [ 4, 8,12,13], 42: [8,  9, 10, 12], 43: [4,  5,  9, 13], # L2.
-        50: [ 9,12,13,14], 51: [ 4, 8, 9,12], 52: [8,  9, 10, 13], 53: [5,  8,  9, 13], # T.
-        60: [ 8, 9,12,13],    # O.
-        70: [12,13,14,15], 71: [ 1, 5, 9,13]    #I.
+        10: [3,11,12,20], 11: [3,4,10,11],   # N1.
+        20: [4,11,12,19], 21: [3,4,12,13],   # N2.
+        30: [3,11,12,13], 31: [3,4,11,19], 32: [2,3,4,12], 33: [4,12,19,20], # L1.
+        40: [4,10,11,12], 41: [3,11,19,20], 42: [3,4,5,11], 43: [3,4,12,20], # L2.
+        50: [3,4,5,12], 51: [3,11,12,19], 52: [4,11,12,20], 53: [3,10,11,12], # T.
+        60: [3,4,11,12],    # O.
+        70: [3,11,19,27], 71: [2,3,4,5]    #I.
 }
 # 方塊編號(1~7).
 brick_id = 1
@@ -221,23 +221,49 @@ class GameModel(Model):
                         self.falling_class+=1
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
             return self.falling_block[i]
-            print(50)
             
         elif self.falling_class == 51:
-            print(51)
+            temp_Falling[0]=temp_Falling[0]+1
+            temp_Falling[3]=temp_Falling[3]+1
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
             
         elif self.falling_class == 52:
-            print(52)
-            
+            temp_Falling[0]=temp_Falling[0]-1
+            temp_Falling[1]=temp_Falling[1]-1
+            temp_Falling[2]=temp_Falling[2]-1
+            temp_Falling[3]=temp_Falling[3]-8
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
+
         elif self.falling_class == 53:
-            print(53)
+            temp_Falling[1]=temp_Falling[1]-6
+            temp_Falling[2]=temp_Falling[2]-6
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class+=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
             
         elif self.falling_class == 60:
             return self.falling_class
         
         elif self.falling_class == 70:
-
-            print(70)
+            temp_Falling[0]=temp_Falling[0]-1
+            temp_Falling[1]=temp_Falling[1]-8
+            temp_Falling[2]=temp_Falling[2]-15
+            temp_Falling[3]=temp_Falling[3]-22
+            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+                for i in range(4):
+                        self.falling_class-=1
+                        self.falling_block[i]=temp_Falling[i] #將假定值帶入
+            return self.falling_block[i]
             
         elif self.falling_class == 71:
             print(71)
