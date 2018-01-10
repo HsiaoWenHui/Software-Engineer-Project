@@ -525,9 +525,6 @@ class GameModel(Model):
                 else:
                     tmp.append(var)
                     
-                    
-        if not self.Check_Frozen():
-            return "Lose"
             
     def Check_Frozen(self, temp):
         flag = False
