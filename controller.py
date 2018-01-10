@@ -6,17 +6,22 @@ Created on Tue Dec 26 21:37:58 2017
 """
 import view
 import model
+import tkinter
+import time
 
 class Control():    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
+    def __init__(self):
+        self.root = tkinter.Tk()
+        self.root.title("Tetris")
+        self.model = model.GameModel()
+        self.view = view.Application(self.root,self.model)
         self.fflag = False
         self.flag = False
         self.input = False
         self.state = "NULL"
-    
+        
+        #self.start()
     def gameinput(self, event):
         if event == "LEFT":
             self.model.Move()
@@ -47,16 +52,50 @@ class Control():
         return self.fflag
 
     def start(self):
+        
         self.setstate("IDLE")
+        #print("IDLE")
         while True:
-            if self.state != self.getbuttoninput():
-                self.setstate(self.getbuttoninput())
-            if self.state == "PLAY":                
-                if self.getkeyinput()!="NULL":
-                    self.modle.move()
-                if not self.modle.Play():
-                    self.setstate("OVER")
-            self.view.changeView()    
+            #print(self.state)
+            button = self.getbuttoninput()
+            if self.state != button:
+                self.setstate(button)
+                if button == "PLAY":
+                    timer = time.time()
+                if button == "IDLE":
+                    self.model = model.GameModel()
+                    self.view = view.Application(self.root,self.model)
+            elif self.state == "PLAY":  
+                timepass = float(time.time()-timer)
+                #print (timepass)
+                
+                if timepass > (1):
+                    print(self.model.frozen_board)
+                    if self.model.Fall_Down():                        
+                        timer = time.time()
+                    
+                    self.view.updateGame()
+                else:
+                    key = self.getkeyinput()
+                    if key != "":
+                        print(key)
+                        if key == "UP":
+                            self.model.Turn()
+                        elif key == "DOWN":
+                            if not self.model.Fall_Down():
+                                self.setstate("OVER")
+                                self.view.state = "OVER"
+                        elif key == "LEFT":
+                            self.model.Move(-1)
+                        elif key == "RIGHT":
+                            self.model.Move(1)
+                    self.view.updateGame()
+                #if self.getkeyinput()!="NULL":
+                   # self.model.move()
+               # if not self.model.Play():
+                  #  self.setstate("OVER")
+            
+            self.root.update()
                     
 
     
@@ -69,5 +108,14 @@ class Control():
     def setting(self):
         self.setstate("SET")
 
+"""
+root = tkinter.Tk()
+root.title("Tetris")
+m=model.GameModel()
+v=view.Application(root,m)
 
-
+c=Control(m,v)
+root.mainloop()
+"""
+c=Control()
+c.start()
