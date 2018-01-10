@@ -90,6 +90,9 @@ class GameModel(Model):
         temp_Falling=list(self.falling_block) #複製原始block位置
         outCheck=True
         if self.falling_class == 10 :
+            if(temp_Falling[0]%8==6)
+                   outCheck=False
+                
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-2
             temp_Falling[3]=temp_Falling[3]-9
@@ -120,6 +123,8 @@ class GameModel(Model):
              return self.falling_block[i]
             
         elif self.falling_class== 20:
+            if(temp_Falling[0]%8==7)
+                   outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[3]=temp_Falling[3]-6
@@ -127,8 +132,6 @@ class GameModel(Model):
                 for j in temp_Falling:
                     if(j==i):
                         outCheck=False
-            if(temp_Falling[0]%8==7)
-                   outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -164,6 +167,8 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 31:
+            if(temp_Falling[0]%8==0):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]-7
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-1
@@ -194,6 +199,8 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 33:
+            if(temp_Falling[0]%8==7):
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]+1
             temp_Falling[2]=temp_Falling[2]+7
