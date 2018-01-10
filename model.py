@@ -103,8 +103,7 @@ class GameModel(Model):
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                     self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_block[i]=temp_Falling[i] #將假定值帶值
             
         elif self.falling_class== 11:
             temp_Falling[1]=temp_Falling[1]+7
@@ -141,7 +140,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 21:
             temp_Falling[0]=temp_Falling[0]+1
@@ -158,7 +156,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class-=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
 
         elif self.falling_class == 30:
             temp_Falling[1]=temp_Falling[1]-7
@@ -175,7 +172,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 31:
             if(temp_Falling[0]%8==0):
@@ -195,7 +191,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 32:
             temp_Falling[0]=temp_Falling[0]+2
@@ -213,7 +208,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 33:
             if(temp_Falling[0]%8==7):
@@ -233,7 +227,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class-=3
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 40:
             temp_Falling[0]=temp_Falling[0]-1
@@ -251,7 +244,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 41:
             if(temp_Falling[0]%8==6):
@@ -270,7 +262,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 42:
             temp_Falling[2]=temp_Falling[2]+7
@@ -286,7 +277,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 43:
             if(temp_Falling[0]%8==0):
@@ -306,7 +296,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class-=3
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 50:
             temp_Falling[1]=temp_Falling[1]+7
@@ -323,7 +312,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 51:
             if(tempFalling[0]%8==1):
@@ -343,7 +331,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 52:
             temp_Falling[0]=temp_Falling[0]-1
@@ -361,7 +348,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
 
         elif self.falling_class == 53:
             if(temp_Falling[0]%8==6):
@@ -381,7 +367,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 60:
             return self.falling_class
@@ -408,7 +393,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
             
         elif self.falling_class == 71:
             temp_Falling[0]=temp_Falling[0]+1
@@ -426,7 +410,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class-=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
 
         else:
             print("error")
@@ -532,7 +515,7 @@ class GameModel(Model):
             for i in self.falling_block:
                 self.board_state[i] = state#print something exist
                 
-        return exist
+        return true
         
     def Play(self):
         exact_Speed = 1 / self.speed
