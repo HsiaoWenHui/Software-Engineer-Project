@@ -504,23 +504,20 @@ class GameModel(Model):
                     
             
     def Check_Frozen(self, temp):
-        flag = False
+        board_size = self.board[0] * self.board[1]
         for i in temp:
-            try:
-                if not (self.frozen_board[i] == 0):#hit block
-                    flag = True
-                    break
-            except:#hit boarder
-                flag = True
-                break
+            if i < board_size:
+                if self.frozen_board[i] != 0:#hit block input into frozen
+                    state = int(self.falling_class / 10)
+                    for blc in self.falling_block:
+                        self.frozen_board[blc] = state
+                    return True
                 
-        if flag:# hit and then store falling block into frozen board
-            state = int(self.falling_class / 10)
-            for blc in self.falling_block:
-                self.frozen_board[blc] = state
-            self.falling_block.clear()
-            return True
-        
+            else:#hit boarder
+                state = int(self.falling_class / 10)
+                for blc in self.falling_block:
+                    self.frozen_board[blc] = state
+                return True
         return False
     
                
@@ -565,10 +562,11 @@ class GameModel(Model):
 
     def New_Block(self):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
+        self.falling_block.clear()
         self.falling_block = brick_dict[self.falling_class]
         
         for i in self.falling_block:
-            if not (self.frozen_board[i] == 0):
+            if not (self.frozen_board[i] == 0):# die
                 return False
             
         state = int(self.falling_class / 10)
