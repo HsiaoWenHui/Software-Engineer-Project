@@ -4,14 +4,17 @@ Created on Tue Dec 26 21:37:58 2017
 
 @author: vincentS
 """
-from enum import Flag
-import time
+import view
+import model
+
 class Control():    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
-    def __init__(self, view):
-        #self.model = model
+    def __init__(self, model, view):
+        self.model = model
         self.view = view
+        self.fflag = False
         self.flag = False
+        self.input = False
         self.state = "NULL"
     
     def gameinput(self, event):
@@ -24,40 +27,41 @@ class Control():
         if event == "ROTATE":
             self.model.Turn()
 
-#    def setinput(self. event):
-
-    def setstate(self, state):
+    def setstate(self, state): 
         self.state = state
         self.view.changeView(self.state)
         print (self.state)
+        self.model.Set_State(self.state)
 
- #       self.model.Set_State(self.state)
-
+    def getbuttoninput(self):
+        return self.view.getUserInput()
+    
+    def getkeyinput(self):
+        return self.view.gameinput()
     #檢查掉落結束
 #    def finishcheck(self):
  #       return self.model.finishflag()
     def finishcheck(self):
-        return True
-    def finish(self):
         return self.flag
+    def finish(self):
+        return self.fflag
 
     def start(self):
         self.setstate("IDLE")
+        while True:
+            if self.state != self.getbuttoninput():
+                self.setstate(self.getbuttoninput())
+            if self.state == "PLAY":                
+                if self.getkeyinput()!="NULL":
+                    self.modle.move()
+                if not self.modle.Play():
+                    self.setstate("OVER")
+            self.view.changeView()    
+                    
+
     
-    def play(self):
-        self.setstate("PLAY")
-        print("while playing")
-        """while self.state == "PLAY":
-            if self.finishcheck():
-                print ("checking")
-                self.setstate("CHECK")
-                while self.state == "CHECK":
-                    if self.finishcheck():
-                        self.setstate("PLAY")
-#            if self.model.Check_Frozen():
-            if self.finish():
-                self.setstate("OVER")
-            time.sleep(10)"""
+    def check(self):
+        self.setstate("CHECK")
 
     def pause(self):
         self.setstate("PAUSE")
