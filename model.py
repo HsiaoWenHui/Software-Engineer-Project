@@ -36,19 +36,12 @@ class Model:
             if self.Play():
                 self.Set_State("Check")
             
-        elif newState =="Check":
-            self.state = "Check"
-            if self.Check_Frozen():
-                self.Set_State("PLAY")
-            else:
-                self.Set_State("OVER")
-            
         elif newState == "IDLE":
             self.state = "IDLE"
             
         elif newState == "SET":
             self.state = "SET"
-            self.Change_Speed()
+            #self.Change_Speed()
             
         elif newState == "PAUSE":
             self.state = "PAUSE"
@@ -432,10 +425,10 @@ class GameModel(Model):
             print("error")
 
             
-    def Move(self):
+    #def Move(self):
         
-        if not self.Check_Frozen():
-            return "Lose"
+        #if not self.Check_Frozen():
+         #   return "Lose"
             
     def Check_Frozen(self, temp):
         flag = False

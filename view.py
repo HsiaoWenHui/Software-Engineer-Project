@@ -49,6 +49,7 @@ class Application(tkinter.Frame):
         self.startFrame()
 
     def changeView(self,state):
+            print("enter changeview")
             self.state=state
             if state=="IDLE":
                 self.clear()
@@ -123,9 +124,8 @@ class Application(tkinter.Frame):
     def pauseFrame(self):
         
         self.restartButton.place(x=176,y=200,anchor='center')
-        self.cancelButton.place(x=86,y=300,anchor='w')
-        self.settingButton.config(image=self.setImage2,width=80,height=80)
-        self.settingButton.place(x=176,y=300,anchor='w')
+        self.cancelButton.place(x=176,y=300,anchor='center')
+        
     
         
     def setFrame(self):
@@ -157,16 +157,18 @@ class Application(tkinter.Frame):
     
     def getUserInput(self):
         return self.state
-    def gameinput(self,inputstate):
+    def gameinput(self):
         return self.gamestate
         self.gamestate=""
     def over(self):
         tkinter.messagebox.showinfo("Tetris", "Game Over")
         self.state='OVER'
     def play(self):
+        print("viewPlay")
         self.state='PLAY'
         
     def set(self):
+        print("viewSet")
         self.state='SET'
        
     def pause(self):
@@ -176,10 +178,10 @@ class Application(tkinter.Frame):
         print (self.view.get()+" button pressed")
     def cancel(self):
         if(self.state=="SET"):
-            self.state='SET'
+            self.state='IDLE'
             
         elif(self.state=="PAUSE"):
-            self.state='PAUSE'
+            self.state='PLAY'
             
     def restart(self):
         self.state="IDLE"

@@ -59,11 +59,12 @@ class Control():
             print(self.state)
             if self.state != self.getbuttoninput():
                 self.setstate(self.getbuttoninput())
-            if self.state == "PLAY":                
-                if self.getkeyinput()!="NULL":
-                    self.modle.move()
-                if not self.modle.Play():
-                    self.setstate("OVER")
+            if self.state == "PLAY":  
+                pass              
+                #if self.getkeyinput()!="NULL":
+                   # self.model.move()
+               # if not self.model.Play():
+                  #  self.setstate("OVER")
             self.view.changeView(self.state)
             self.root.update()
                     
