@@ -87,11 +87,16 @@ class GameModel(Model):
         
     def Turn(self):
         temp_Falling=list(self.falling_block) #複製原始block位置
+        outCheck=True
         if self.falling_class == 10 :
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-2
             temp_Falling[3]=temp_Falling[3]-9
-            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in range(4):
+                    if(j==i):
+                        outCheck=False
+            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
@@ -101,7 +106,11 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]+7
             temp_Falling[2]=temp_Falling[2]+2
             temp_Falling[3]=temp_Falling[3]+9
-            if():#若沒有撞到frozen或是邊緣則可進行旋轉
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in range(4):
+                    if(j==i):
+                        outCheck=False
+            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=1
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
