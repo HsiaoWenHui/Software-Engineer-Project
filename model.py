@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 24 22:07:48 2017
 
-@author: Danny
-"""
 import random
-import time
 
 # 定義磚塊.
 brick_dict = {
@@ -17,12 +12,6 @@ brick_dict = {
         60: [3,4,11,12],    # O.
         70: [3,11,19,27], 71: [2,3,4,5]    #I.
 }
-# 方塊編號(1~7).
-brick_id = 1
-# 方塊狀態(0~3).
-brick_state = 0
-# 下一個磚塊編號(1~7).
-brick_next_id = 1
 board_long=14
 class Model:
     speed = 5
@@ -33,15 +22,12 @@ class Model:
     def Set_State(self, newState):
         if newState == "PLAY":
             self.state = "PLAY"
-            if self.Play():
-                self.Set_State("Check")
             
         elif newState == "IDLE":
             self.state = "IDLE"
             
         elif newState == "SET":
             self.state = "SET"
-            #self.Change_Speed()
             
         elif newState == "PAUSE":
             self.state = "PAUSE"
@@ -61,7 +47,7 @@ class GameModel(Model):
     def __init__(self, lv = 5):
         super().__init__(lv)
         self.falling_block = []
-        self.falling_class = 0
+        self.falling_class =0
         
         self.board = (8,15)# x,y
         self.board_state = []#print mode
@@ -69,443 +55,533 @@ class GameModel(Model):
         self.point = 0
         
         #all board state
-        size = self.board[0] * self.board[1]
-        for i in range(0,size):
+        size = 120
+        for i in range(0,size):    
             self.board_state.append(0)#nothing
             self.frozen_board.append(0)
             
         self.New_Block()
-        self.Play()
         
     def Turn(self):
-        temp_Falling=list(self.falling_block) #複製原始block位置
-        outCheck=True
+        temp_Falling = list(self.falling_block) #複製原始block位置
+        outCheck = True
         if self.falling_class == 10 :
-            if(temp_Falling[0]%8==6):
-                outCheck=False              
-            temp_Falling[1]=temp_Falling[1]-7
-            temp_Falling[2]=temp_Falling[2]-2
-            temp_Falling[3]=temp_Falling[3]-9
-            for i in self.frozen_board: #檢查是否在冷凍版上
-                for j in range(4):
-                    if(j==i):
-                        outCheck=False
-            for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
-                for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+            if(temp_Falling[0] % 8 == 6):
+                   outCheck = False              
+            temp_Falling[1] = temp_Falling[1] - 7
+            temp_Falling[2] = temp_Falling[2] - 2
+            temp_Falling[3] = temp_Falling[3] - 9
             
-        elif self.falling_class== 11:
-            temp_Falling[1]=temp_Falling[1]+7
-            temp_Falling[2]=temp_Falling[2]+2
-            temp_Falling[3]=temp_Falling[3]+9
-            for i in self.frozen_board: #檢查是否在冷凍版上
-                for j in range(4):
-                    if(j==i):
-                        outCheck=False
+            #檢查是否在冷凍版上
+            for i in self.frozen_board: 
+                for j in temp_Falling:
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
+                    if((i / 8) > board_long):
+                        outCheck = False
+                        
+            #若沒有撞到frozen或是邊緣則可進行旋轉
+            if(outCheck):
+                for i in range(4):
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+            
+        
+        elif self.falling_class == 11:
+            temp_Falling[1] = temp_Falling[1] + 7
+            temp_Falling[2] = temp_Falling[2] + 2
+            temp_Falling[3] = temp_Falling[3] + 9
+            
+            
+            for i in self.frozen_board: 
+                for j in temp_Falling:
+                    if(j == i):
+                        outCheck = False
+            for i in temp_Falling:
+                if((i / 8) > board_long):
+                    outCheck = False
 
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class-=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class -= 1
+                    self.falling_block[i] = temp_Falling[i] 
             
-        elif self.falling_class== 20:
-            if(temp_Falling[0]%8==7):
-                outCheck=False
-            temp_Falling[0]=temp_Falling[0]-1
-            temp_Falling[1]=temp_Falling[1]-7
-            temp_Falling[3]=temp_Falling[3]-6
-            for i in self.frozen_board: #檢查是否在冷凍版上
+        elif self.falling_class == 20:
+            if(temp_Falling[0] % 8 == 7):
+                outCheck = False
+            temp_Falling[0] = temp_Falling[0] - 1
+            temp_Falling[1] = temp_Falling[1] - 7
+            temp_Falling[3] = temp_Falling[3] - 6
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
-                for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                if((i / 8) > board_long):
+                    outCheck = False
             
+            if(outCheck):
+                for i in range(4):
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i] 
+
+                        
         elif self.falling_class == 21:
-            temp_Falling[0]=temp_Falling[0]+1
-            temp_Falling[1]=temp_Falling[1]+7
-            temp_Falling[3]=temp_Falling[3]+6
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[0] = temp_Falling[0] + 1
+            temp_Falling[1] = temp_Falling[1] + 7
+            temp_Falling[3] = temp_Falling[3] + 6
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+                    
+                    
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class-=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class -= 1
+                    self.falling_block[i] = temp_Falling[i] 
+
 
         elif self.falling_class == 30:
-            temp_Falling[1]=temp_Falling[1]-7
-            temp_Falling[2]=temp_Falling[2]-1
-            temp_Falling[3]=temp_Falling[3]+6
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[1] = temp_Falling[1] - 7
+            temp_Falling[2] = temp_Falling[2] - 1
+            temp_Falling[3] = temp_Falling[3] + 6
+
+
+            for i in self.frozen_board: 
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i] 
             
         elif self.falling_class == 31:
-            if(temp_Falling[0]%8==0):
-                outCheck=False
-            temp_Falling[0]=temp_Falling[0]-7
-            temp_Falling[1]=temp_Falling[1]-7
-            temp_Falling[2]=temp_Falling[2]-1
-            temp_Falling[3]=temp_Falling[3]+6
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 0):
+                outCheck = False
+            temp_Falling[0] = temp_Falling[0] - 7
+            temp_Falling[1] = temp_Falling[1] - 7
+            temp_Falling[2] = temp_Falling[2] - 1
+            temp_Falling[3] = temp_Falling[3] + 6
+
+
+            for i in self.frozen_board: 
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
             return self.falling_block[i]
+
             
         elif self.falling_class == 32:
-            temp_Falling[0]=temp_Falling[0]+2
-            temp_Falling[1]=temp_Falling[1]+9
-            temp_Falling[2]=temp_Falling[2]+15
-            temp_Falling[3]=temp_Falling[3]+8
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[0] = temp_Falling[0] + 2
+            temp_Falling[1] = temp_Falling[1] + 9
+            temp_Falling[2] = temp_Falling[2] + 15
+            temp_Falling[3] = temp_Falling[3] + 8
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
             
+
         elif self.falling_class == 33:
-            if(temp_Falling[0]%8==7):
-                outCheck=False
-            temp_Falling[0]=temp_Falling[0]-1
-            temp_Falling[1]=temp_Falling[1]+1
-            temp_Falling[2]=temp_Falling[2]+7
-            temp_Falling[3]=temp_Falling[3]-7
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 7):
+                outCheck = False
+            temp_Falling[0] = temp_Falling[0] - 1
+            temp_Falling[1] = temp_Falling[1] + 1
+            temp_Falling[2] = temp_Falling[2] + 7
+            temp_Falling[3] = temp_Falling[3] - 7
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class-=3
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class -= 3
+                    self.falling_block[i] = temp_Falling[i]
+
             
         elif self.falling_class == 40:
-            temp_Falling[0]=temp_Falling[0]-1
-            temp_Falling[1]=temp_Falling[1]+1
-            temp_Falling[2]=temp_Falling[2]+8
-            temp_Falling[3]=temp_Falling[3]+8
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[0] = temp_Falling[0] - 1
+            temp_Falling[1] = temp_Falling[1] + 1
+            temp_Falling[2] = temp_Falling[2] + 8
+            temp_Falling[3] = temp_Falling[3] + 8
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
             
+
         elif self.falling_class == 41:
-            if(temp_Falling[0]%8==6):
-                outCheck=False
-            temp_Falling[1]=temp_Falling[1]-7
-            temp_Falling[2]=temp_Falling[2]-14
-            temp_Falling[3]=temp_Falling[3]-9
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 6):
+                outCheck = False
+            temp_Falling[1] = temp_Falling[1] - 7
+            temp_Falling[2] = temp_Falling[2] - 14
+            temp_Falling[3] = temp_Falling[3] - 9
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
+
             
         elif self.falling_class == 42:
-            temp_Falling[2]=temp_Falling[2]+7
-            temp_Falling[3]=temp_Falling[3]+9
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[2] = temp_Falling[2] + 7
+            temp_Falling[3] = temp_Falling[3] + 9
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
             
+
         elif self.falling_class == 43:
-            if(temp_Falling[0]%8==0):
-                outCheck=False
-            temp_Falling[0]=temp_Falling[0]+1
-            temp_Falling[1]=temp_Falling[1]-6
-            temp_Falling[2]=temp_Falling[2]-1
-            temp_Falling[3]=temp_Falling[3]-8
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 0):
+                outCheck = False
+            temp_Falling[0] = temp_Falling[0] + 1
+            temp_Falling[1] = temp_Falling[1] - 6
+            temp_Falling[2] = temp_Falling[2] - 1
+            temp_Falling[3] = temp_Falling[3] - 8
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class-=3
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class -= 3
+                    self.falling_block[i] = temp_Falling[i]
+
             
         elif self.falling_class == 50:
-            temp_Falling[1]=temp_Falling[1]+7
-            temp_Falling[2]=temp_Falling[2]+7
-            temp_Falling[3]=temp_Falling[3]+7
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[1] = temp_Falling[1] + 7
+            temp_Falling[2] = temp_Falling[2] + 7
+            temp_Falling[3] = temp_Falling[3] + 7
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
+
             
         elif self.falling_class == 51:
-            if(temp_Falling[0]%8==1):
-                outCheck=False
-            elif(temp_Falling[0]%8==0):
-                outCheck=False
-            temp_Falling[0]=temp_Falling[0]+1
-            temp_Falling[3]=temp_Falling[3]+1
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 1):
+                outCheck = False
+            elif(temp_Falling[0] % 8 == 0):
+                outCheck = False
+            temp_Falling[0] = temp_Falling[0] + 1
+            temp_Falling[3] = temp_Falling[3] + 1
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                    if((i/8)>board_long):
-                        outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
             
         elif self.falling_class == 52:
-            temp_Falling[0]=temp_Falling[0]-1
-            temp_Falling[1]=temp_Falling[1]-1
-            temp_Falling[2]=temp_Falling[2]-1
-            temp_Falling[3]=temp_Falling[3]-8
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[0] = temp_Falling[0] - 1
+            temp_Falling[1] = temp_Falling[1] - 1
+            temp_Falling[2] = temp_Falling[2] - 1
+            temp_Falling[3] = temp_Falling[3] - 8
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
+
 
         elif self.falling_class == 53:
-            if(temp_Falling[0]%8==6):
-                outCheck=False
-            elif(temp_Falling[0]%8==7):
-                outCheck=False
-            temp_Falling[1]=temp_Falling[1]-6
-            temp_Falling[2]=temp_Falling[2]-6
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 6):
+                outCheck = False
+            elif(temp_Falling[0] % 8 == 7):
+                outCheck = False
+            temp_Falling[1] = temp_Falling[1] - 6
+            temp_Falling[2] = temp_Falling[2] - 6
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
-            
-        elif self.falling_class == 60:
-            return self.falling_class
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i] 
+
         
         elif self.falling_class == 70:
-            if(temp_Falling[0]%8==0):
-                outCheck=False
-            elif(temp_Falling[0]%8==6):
-                outCheck=False
-            elif(temp_Falling[0]%8==7):
-                outCheck=False
-            temp_Falling[0]=temp_Falling[0]-1
-            temp_Falling[1]=temp_Falling[1]-8
-            temp_Falling[2]=temp_Falling[2]-15
-            temp_Falling[3]=temp_Falling[3]-22
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            if(temp_Falling[0] % 8 == 0):
+                outCheck = False
+            elif(temp_Falling[0] % 8 == 6):
+                outCheck = False
+            elif(temp_Falling[0] % 8 == 7):
+                outCheck = False
+
+            temp_Falling[0] = temp_Falling[0] - 1
+            temp_Falling[1] = temp_Falling[1] - 8
+            temp_Falling[2] = temp_Falling[2] - 15
+            temp_Falling[3] = temp_Falling[3] - 22
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck): #若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class+=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
+                    self.falling_class += 1
+                    self.falling_block[i] = temp_Falling[i]
             
+
         elif self.falling_class == 71:
-            temp_Falling[0]=temp_Falling[0]+1
-            temp_Falling[1]=temp_Falling[1]+8
-            temp_Falling[2]=temp_Falling[2]+15
-            temp_Falling[3]=temp_Falling[3]+22
-            for i in self.frozen_board: #檢查是否在冷凍版上
+            temp_Falling[0] = temp_Falling[0] + 1
+            temp_Falling[1] = temp_Falling[1] + 8
+            temp_Falling[2] = temp_Falling[2] + 15
+            temp_Falling[3] = temp_Falling[3] + 22
+
+
+            for i in self.frozen_board:
                 for j in temp_Falling:
-                    if(j==i):
-                        outCheck=False
+                    if(j == i):
+                        outCheck = False
             for i in temp_Falling:
-                if((i/8)>board_long):
-                    outCheck=False
-            if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
+                if((i / 8) > board_long):
+                    outCheck = False
+
+
+            if(outCheck):
                 for i in range(4):
-                    self.falling_class-=1
-                    self.falling_block[i]=temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
-
-        else:
-            print("error")
-
+                    self.falling_class -= 1
+                    self.falling_block[i] = temp_Falling[i] 
             
-    #def Move(self):
-        
-        #if not self.Check_Frozen():
-         #   return "Lose"
+    def Move(self, lorr):
+        tmp = []
+        if lorr == 1:#right
+            for x in self.falling_block:
+                var = x + 1
+                place = var % 8
+                if place == 0:
+                    return True#hit boarder 
+                else:
+                    tmp.append(var)
+            if self.Check_Frozen(tmp):
+                self.board_state = self.frozen_board#not hit
+            else:
+                self.falling_block = tmp
+                state = int(self.falling_class / 10)
+                for blc in self.falling_block:
+                    self.frozen_board[blc] = state
+                
+                    
+        else:#left
+            for x in self.falling_block:
+                var = x + 1
+                place = var % 8
+                if place == 0:
+                    return True
+                else:
+                    tmp.append(var)
+                    
             
     def Check_Frozen(self, temp):
-        flag = False
+        board_size = 120
+        count = 0
         for i in temp:
-            try:
-                if self.frozen_board[i] != 0:#hit
-                    flag = True
-                    break
-            except:
-                flag = True
-                break
+            if i < board_size:
+                if self.frozen_board[i] != 0:
+                    #hit block input into frozen
+                    count += 1
+            else:#hit boarder
+                count += 1
                 
-        if flag:# hit and then store falling block into frozen board
+        if count == 0:
+            return False
+        else:
             state = int(self.falling_class / 10)
             for blc in self.falling_block:
                 self.frozen_board[blc] = state
-                
             return True
-        
-        return False
-        
-    
     
                
     def Check_Erase(self):
-        chk_rowStart = []
-        for block in self.falling_block:
-            x = block % self.board[0]
-            start = block - x
-            if not (start in chk_rowStart):
-                chk_rowStart.append(start)#store all row start need to check
-                
-        erase_row = []
-        for x in chk_rowStart:
-            i = 0
-            tmp = x
-            while not (self.frozen_board[tmp] == 0):
-                i += 1
-                tmp = x + i
-            if i >= self.board[0]:
-                erase_row.append(x)
+        print(1)
+#        chk_rowStart = []
+#        for block in self.falling_block:
+#            x = block % 8
+#            start = block - x
+#            if not (start in chk_rowStart):
+#                chk_rowStart.append(start)#store all row start need to check
+#                
+#        erase_row = []
+#        for x in chk_rowStart:
+#            i = 0
+#            tmp = x
+#            while not (self.frozen_board[tmp] == 0):
+#                i += 1
+#                tmp = x + i
+#            if i >= self.board[0]:
+#                erase_row.append(x)
+#
+#        #some row need to erase, move down upper block
+#        if erase_row:
+#            temp_board = self.frozen_board
+#            for rowX in erase_row:
+#                i = 0
+#                while i < rowX:
+#                    temp_board[i + 8] = temp_board[i]
+#
+#
+#        if len(erase_row) == 1:
+#            self.point += 10
+#        elif len(erase_row) == 2:
+#            self.point += 30
+#        elif len(erase_row) == 3:
+#            self.point += 70
+#        elif len(erase_row) == 4:
+#            self.point += 150
+#        else:
+#            return
 
-        #some row need to erase, move down upper block
-        if erase_row:
-            temp_board = self.frozen_board
-            for rowX in erase_row:
-                i = 0
-                while i < rowX:
-                    temp_board[i+self.board[0]] = temp_board[i]
-
-        if len(erase_row) == 1:
-            self.point += 10
-        elif len(erase_row) == 2:
-            self.point += 30
-        elif len(erase_row) == 3:
-            self.point += 70
-        else:
-            self.point += 150
 
     def New_Block(self):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
+        self.falling_block.clear()
         self.falling_block = brick_dict[self.falling_class]
         
         for i in self.falling_block:
-            if not (self.frozen_board[i] == 0):
+            if not (self.frozen_board[i] == 0):# die
                 return False
+            
         state = int(self.falling_class / 10)
         for x in self.falling_block:
             self.board_state[x] = state#print something exist
         return True
             
+    
     def Fall_Down(self):
         temp = []#next place
-        temp.append(self.falling_block[0] + self.board[0])
-        temp.append(self.falling_block[1] + self.board[0])
-        temp.append(self.falling_block[2] + self.board[0])
-        temp.append(self.falling_block[3] + self.board[0])
+        temp.append(self.falling_block[0] + 8)
+        temp.append(self.falling_block[1] + 8)
+        temp.append(self.falling_block[2] + 8)
+        temp.append(self.falling_block[3] + 8)
+        
         
         #hit
         if self.Check_Frozen(temp):#T hit , F not hit
@@ -515,21 +591,12 @@ class GameModel(Model):
         
         #not hit
         else:
-            #delete privious falling block
-            for i in self.falling_block:
-                self.board_state[i] = 0
-                
+            #delete privious falling block, add frozen
+            self.board_state = self.frozen_board
+                        
             #move down    
             self.falling_block = temp
             state = int(self.falling_class / 10)
             for i in self.falling_block:
                 self.board_state[i] = state#print something exist
-                
         return True
-    
-        
-    def Play(self):
-        exact_Speed = 1 / self.speed
-        time.sleep(exact_Speed)
-        return self.Fall_Down()
-
