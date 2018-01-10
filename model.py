@@ -87,9 +87,8 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i] #將假定值帶入
-            return self.falling_block[i]
-
             
+        
         elif self.falling_class == 11:
             temp_Falling[1] = temp_Falling[1] + 7
             temp_Falling[2] = temp_Falling[2] + 2
@@ -109,8 +108,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class -= 1
                     self.falling_block[i] = temp_Falling[i] 
-            return self.falling_block[i]
-
             
         elif self.falling_class == 20:
             if(temp_Falling[0] % 8 == 7):
@@ -127,15 +124,13 @@ class GameModel(Model):
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
-
-
+            
             if(outCheck):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i] 
-            return self.falling_block[i]
 
-            
+                        
         elif self.falling_class == 21:
             temp_Falling[0] = temp_Falling[0] + 1
             temp_Falling[1] = temp_Falling[1] + 7
@@ -155,7 +150,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class -= 1
                     self.falling_block[i] = temp_Falling[i] 
-            return self.falling_block[i]
 
 
         elif self.falling_class == 30:
@@ -177,7 +171,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i] 
-            return self.falling_block[i]
             
         elif self.falling_class == 31:
             if(temp_Falling[0] % 8 == 0):
@@ -224,7 +217,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
             
 
         elif self.falling_class == 33:
@@ -249,7 +241,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class -= 3
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
 
             
         elif self.falling_class == 40:
@@ -272,7 +263,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
             
 
         elif self.falling_class == 41:
@@ -296,7 +286,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
 
             
         elif self.falling_class == 42:
@@ -317,7 +306,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
             
 
         elif self.falling_class == 43:
@@ -342,7 +330,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class -= 3
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
 
             
         elif self.falling_class == 50:
@@ -364,7 +351,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
 
             
         elif self.falling_class == 51:
@@ -389,7 +375,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
             
         elif self.falling_class == 52:
             temp_Falling[0] = temp_Falling[0] - 1
@@ -411,7 +396,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
 
 
         elif self.falling_class == 53:
@@ -436,11 +420,9 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i] 
-            return self.falling_block[i]
 
             
         elif self.falling_class == 60:
-            return self.falling_class
         
         elif self.falling_class == 70:
             if(temp_Falling[0] % 8 == 0):
@@ -469,7 +451,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
             
 
         elif self.falling_class == 71:
@@ -492,10 +473,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class -= 1
                     self.falling_block[i] = temp_Falling[i] 
-            return self.falling_block[i]
-
-        else:
-            print("error")
             
     def Move(self, lorr):
         tmp = []
