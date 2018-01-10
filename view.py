@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import tkinter
-import ttk
-from distutils.dist import command_re
-from tkinter.constants import ANCHOR
+#from distutils.dist import command_re
+#from tkinter.constants import ANCHOR
 from PIL.ImageTk import PhotoImage
-from django.utils.termcolors import background
+#from django.utils.termcolors import background
 import model
-from doctest import master
+#from doctest import master
 import numpy as np
     
 class Application(tkinter.Frame):
     def __init__(self, master):
+        self.mod=model.GameModel()
         tkinter.Frame.__init__(self, master)
         self.master.minsize(width=352, height=660)
         
@@ -81,7 +81,7 @@ class Application(tkinter.Frame):
         
     def updateGame(self):
         
-        self.score.config(text="score : "+mod.point)
+        self.score.config(text="score : "+self.mod.point)
         self.score.place(x=0,y=0,anchor='nw')
       
         col=0
@@ -89,7 +89,7 @@ class Application(tkinter.Frame):
         for i in range(0,120):
             row=i/8
             col=i%8
-            self.board[row][col]=mod.board_state[i]
+            self.board[row][col]=self.mod.board_state[i]
         
         for i in range(0,15):
             for j in range(0,8):
@@ -196,5 +196,4 @@ class Application(tkinter.Frame):
 root = tkinter.Tk()
 root.title("Tetris")
 app = Application(root)
-mod=model.GameModel()
 app.mainloop()
