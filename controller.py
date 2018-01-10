@@ -73,10 +73,12 @@ class Control():
                     print(self.model.frozen_board)
                     if self.model.Fall_Down():                        
                         timer = time.time()
+                        self.view.updateGame()
                     else:
                         self.setstate("OVER")
-                        self.view.state = "OVER"
-                    self.view.updateGame()
+                        self.view.state = "IDEL"
+    
+                    
                 else:
                     key = self.getkeyinput()
                     if key != "":
@@ -86,7 +88,8 @@ class Control():
                         elif key == "DOWN":
                             if not self.model.Fall_Down():
                                 self.view.state = "OVER"
-                                self.setstate("OVER")
+                                self.setstate("IDLE")
+                            
                                 
                         elif key == "LEFT":
                             self.model.Move(-1)
