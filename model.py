@@ -28,7 +28,6 @@ class Model:
             
         elif newState == "SET":
             self.state = "SET"
-            self.Change_Speed()
             
         elif newState == "PAUSE":
             self.state = "PAUSE"
@@ -56,7 +55,7 @@ class GameModel(Model):
         self.point = 0
         
         #all board state
-        size = self.board[0] * self.board[1]
+        size = 120
         for i in range(0,size):    
             self.board_state.append(0)#nothing
             self.frozen_board.append(0)
@@ -421,8 +420,6 @@ class GameModel(Model):
                     self.falling_class += 1
                     self.falling_block[i] = temp_Falling[i] 
 
-            
-        elif self.falling_class == 60:
         
         elif self.falling_class == 70:
             if(temp_Falling[0] % 8 == 0):
@@ -479,7 +476,7 @@ class GameModel(Model):
         if lorr == 1:#right
             for x in self.falling_block:
                 var = x + 1
-                place = var % self.board[0]
+                place = var % 8
                 if place == 0:
                     return True#hit boarder 
                 else:
@@ -496,7 +493,7 @@ class GameModel(Model):
         else:#left
             for x in self.falling_block:
                 var = x + 1
-                place = var % self.board[0]
+                place = var % 8
                 if place == 0:
                     return True
                 else:
@@ -504,7 +501,7 @@ class GameModel(Model):
                     
             
     def Check_Frozen(self, temp):
-        board_size = self.board[0] * self.board[1]
+        board_size = 120
         for i in temp:
             if i < board_size:
                 if self.frozen_board[i] != 0:#hit block input into frozen
@@ -524,7 +521,7 @@ class GameModel(Model):
     def Check_Erase(self):
         chk_rowStart = []
         for block in self.falling_block:
-            x = block % self.board[0]
+            x = block % 8
             start = block - x
             if not (start in chk_rowStart):
                 chk_rowStart.append(start)#store all row start need to check
@@ -545,7 +542,7 @@ class GameModel(Model):
             for rowX in erase_row:
                 i = 0
                 while i < rowX:
-                    temp_board[i+self.board[0]] = temp_board[i]
+                    temp_board[i + 8] = temp_board[i]
 
 
         if len(erase_row) == 1:
@@ -577,10 +574,10 @@ class GameModel(Model):
     
     def Fall_Down(self):
         temp = []#next place
-        temp.append(self.falling_block[0] + self.board[0])
-        temp.append(self.falling_block[1] + self.board[0])
-        temp.append(self.falling_block[2] + self.board[0])
-        temp.append(self.falling_block[3] + self.board[0])
+        temp.append(self.falling_block[0] + 8)
+        temp.append(self.falling_block[1] + 8)
+        temp.append(self.falling_block[2] + 8)
+        temp.append(self.falling_block[3] + 8)
         
         
         #hit
