@@ -97,7 +97,7 @@ class GameModel(Model):
                 for j in range(4):
                     if(j==i):
                         outCheck=False
-            if(temp_Falling[0]%8==6)#第七行所占為七八行，無法轉入第九行
+            if(temp_Falling[0]%8==6):#第七行所占為七八行，無法轉入第九行
                 outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
