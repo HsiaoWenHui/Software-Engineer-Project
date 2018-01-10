@@ -134,6 +134,10 @@ class GameModel(Model):
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[1]=temp_Falling[1]+7
             temp_Falling[3]=temp_Falling[3]+6
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=1
@@ -144,6 +148,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-1
             temp_Falling[3]=temp_Falling[3]+6
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -155,6 +163,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-1
             temp_Falling[3]=temp_Falling[3]+6
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -166,6 +178,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]+9
             temp_Falling[2]=temp_Falling[2]+15
             temp_Falling[3]=temp_Falling[3]+8
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -177,6 +193,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]+1
             temp_Falling[2]=temp_Falling[2]+7
             temp_Falling[3]=temp_Falling[3]-7
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=3
@@ -188,16 +208,24 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]+1
             temp_Falling[2]=temp_Falling[2]+8
             temp_Falling[3]=temp_Falling[3]+8
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
                         self.falling_block[i]=temp_Falling[i] #將假定值帶入
             return self.falling_block[i]
             
-        elif self.falling_class == 41:
+        elif self.falling_class == 41:    
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[2]=temp_Falling[2]-14
             temp_Falling[3]=temp_Falling[3]-9
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -207,6 +235,10 @@ class GameModel(Model):
         elif self.falling_class == 42:
             temp_Falling[2]=temp_Falling[2]+7
             temp_Falling[3]=temp_Falling[3]+9
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -218,6 +250,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]-6
             temp_Falling[2]=temp_Falling[2]-1
             temp_Falling[3]=temp_Falling[3]-8
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=3
@@ -228,6 +264,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]+7
             temp_Falling[2]=temp_Falling[2]+7
             temp_Falling[3]=temp_Falling[3]+7
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -237,6 +277,10 @@ class GameModel(Model):
         elif self.falling_class == 51:
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[3]=temp_Falling[3]+1
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -248,6 +292,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]-1
             temp_Falling[2]=temp_Falling[2]-1
             temp_Falling[3]=temp_Falling[3]-8
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -257,6 +305,10 @@ class GameModel(Model):
         elif self.falling_class == 53:
             temp_Falling[1]=temp_Falling[1]-6
             temp_Falling[2]=temp_Falling[2]-6
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -271,6 +323,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]-8
             temp_Falling[2]=temp_Falling[2]-15
             temp_Falling[3]=temp_Falling[3]-22
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class+=1
@@ -282,6 +338,10 @@ class GameModel(Model):
             temp_Falling[1]=temp_Falling[1]+8
             temp_Falling[2]=temp_Falling[2]+15
             temp_Falling[3]=temp_Falling[3]+22
+            for i in self.frozen_board: #檢查是否在冷凍版上
+                for j in temp_Falling:
+                    if(j==i):
+                        outCheck=False
             if(outCheck):#若沒有撞到frozen或是邊緣則可進行旋轉
                 for i in range(4):
                         self.falling_class-=1
