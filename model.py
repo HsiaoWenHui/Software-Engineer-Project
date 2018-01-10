@@ -122,11 +122,11 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class-=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-             return self.falling_block[i]
+            return self.falling_block[i]
             
         elif self.falling_class== 20:
             if(temp_Falling[0]%8==7):
-               outCheck=False
+                outCheck=False
             temp_Falling[0]=temp_Falling[0]-1
             temp_Falling[1]=temp_Falling[1]-7
             temp_Falling[3]=temp_Falling[3]-6
@@ -326,9 +326,9 @@ class GameModel(Model):
             return self.falling_block[i]
             
         elif self.falling_class == 51:
-            if(tempFalling[0]%8==1):
+            if(temp_Falling[0]%8==1):
                 outCheck=False
-            elif(tempFalling[0]%8==0):
+            elif(temp_Falling[0]%8==0):
                 outCheck=False
             temp_Falling[0]=temp_Falling[0]+1
             temp_Falling[3]=temp_Falling[3]+1
@@ -499,13 +499,13 @@ class GameModel(Model):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
         self.falling_block = brick_dict[self.falling_class]
         
-        for i in falling_block:
-            if not (frozen_board[i] == 0):
+        for i in self.falling_block:
+            if not (self.frozen_board[i] == 0):
                 return False
         state = int(self.falling_class / 10)
         for x in self.falling_block:
             self.board_state[x] = state#print something exist
-        retrun True
+        return True
             
     def Fall_Down(self):
         temp = []#next place
@@ -532,12 +532,11 @@ class GameModel(Model):
             for i in self.falling_block:
                 self.board_state[i] = state#print something exist
                 
-        return exist
+        return True
+    
         
     def Play(self):
         exact_Speed = 1 / self.speed
         time.sleep(exact_Speed)
         return self.Fall_Down()
-        
-a = GameModel()
-a.Fall_Down()
+

@@ -6,17 +6,22 @@ Created on Tue Dec 26 21:37:58 2017
 """
 import view
 import model
+import tkinter
+import threading
 
 class Control():    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
+    def __init__(self):
+        self.root = tkinter.Tk()
+        self.root.title("Tetris")
+        self.model = model.GameModel()
+        self.view = view.Application(self.root,self.model)
         self.fflag = False
         self.flag = False
         self.input = False
         self.state = "NULL"
-    
+        
+        #self.start()
     def gameinput(self, event):
         if event == "LEFT":
             self.model.Move()
@@ -47,8 +52,11 @@ class Control():
         return self.fflag
 
     def start(self):
+        
         self.setstate("IDLE")
+        print("IDLE")
         while True:
+            print(self.state)
             if self.state != self.getbuttoninput():
                 self.setstate(self.getbuttoninput())
             if self.state == "PLAY":                
@@ -56,7 +64,8 @@ class Control():
                     self.modle.move()
                 if not self.modle.Play():
                     self.setstate("OVER")
-            self.view.changeView()    
+            self.view.changeView(self.state)
+            self.root.update()
                     
 
     
@@ -69,5 +78,14 @@ class Control():
     def setting(self):
         self.setstate("SET")
 
+"""
+root = tkinter.Tk()
+root.title("Tetris")
+m=model.GameModel()
+v=view.Application(root,m)
 
-
+c=Control(m,v)
+root.mainloop()
+"""
+c=Control()
+c.start()

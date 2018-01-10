@@ -10,8 +10,8 @@ import model
 import numpy as np
     
 class Application(tkinter.Frame):
-    def __init__(self, master):
-        self.mod=model.GameModel()
+    def __init__(self, master,model):
+        self.mod=model
         tkinter.Frame.__init__(self, master)
         self.master.minsize(width=352, height=660)
         
@@ -193,7 +193,3 @@ class Application(tkinter.Frame):
         self.gamestate="DOWN"
         
 
-root = tkinter.Tk()
-root.title("Tetris")
-app = Application(root)
-app.mainloop()
