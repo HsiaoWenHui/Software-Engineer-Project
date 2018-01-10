@@ -104,6 +104,18 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class+=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶值
+            if self.Check_Frozen(self.falling_block[i]):#T hit , F not hit
+                self.board_state = self.frozen_board
+                return self.New_Block()
+                #not hit
+            else:
+            #delete privious falling block
+                for i in self.falling_block:
+                    self.board_state[i] = 0
+            #move down    
+                    state = int(self.falling_class[i] / 10)
+                    for i in self.falling_block:
+                        self.board_state[i] = state#print something exist
             
         elif self.falling_class== 11:
             temp_Falling[1]=temp_Falling[1]+7
@@ -121,7 +133,6 @@ class GameModel(Model):
                 for i in range(4):
                     self.falling_class-=1
                     self.falling_block[i]=temp_Falling[i] #將假定值帶入
-             return self.falling_block[i]
             
         elif self.falling_class== 20:
             if(temp_Falling[0]%8==7):
