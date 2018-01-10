@@ -509,12 +509,15 @@ class GameModel(Model):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
         self.falling_block = brick_dict[self.falling_class]
         
+        for i in falling_block:
+            if not (frozen_block[i] == 0):
+                return False
         state = int(self.falling_class / 10)
         for x in self.falling_block:
             self.board_state[x] = state#print something exist
+        retrun True
             
     def Fall_Down(self):
-        exist = True
         temp = []#next place
         temp.append(self.falling_block[0] + self.board[0])
         temp.append(self.falling_block[1] + self.board[0])
@@ -525,11 +528,7 @@ class GameModel(Model):
         if self.Check_Frozen(temp):#T hit , F not hit
             self.Check_Erase()
             self.board_state = self.frozen_board
-            exist = self.Check_End()# T exist, F die
-            if exist:
-                self.New_Block()
-            else:
-                #die
+            return self.New_Block()
         
         #not hit
         else:
