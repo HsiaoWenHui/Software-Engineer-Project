@@ -71,7 +71,7 @@ class Control():
                 timepass = float(time.time()-timer)
                 #print (timepass)
                 
-                if timepass > (1):
+                if timepass > (0.5):
                     #s(self.model.frozen_board)
                     if self.model.Fall_Down():                        
                         timer = time.time()

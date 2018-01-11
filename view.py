@@ -85,9 +85,10 @@ class Application(tkinter.Frame):
         
     def updateGame(self):
         #print("update")
-        self.canvas.place_forget()
-        self.canvas.place(x=18,y=45,width=320,height=600,anchor='nw')
-        outside=self.canvas.create_rectangle(0,0,320,600)
+        self.canvas.destroy()
+        canvas=tkinter.Canvas(width=320,height=600,bg="#FFFFF3")
+        canvas.place(x=18,y=45,width=320,height=600,anchor='nw')
+        outside=canvas.create_rectangle(0,0,320,600)
         self.score.config(text="score : "+str(self.mod.point))
         self.score.place(x=0,y=0,anchor='nw')
       
@@ -102,23 +103,23 @@ class Application(tkinter.Frame):
         
         for i in range(0,15):
             for j in range(0,8):
-                square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#FFFFF3")
+                square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#FFFFF3")
                 if self.board[i][j]==1:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#E53A40")#red
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#E53A40")#red
                 elif self.board[i][j]==2:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#30A9DE")#blue
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#30A9DE")#blue
                 elif self.board[i][j]==3:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#8CD790")#green
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#8CD790")#green
                 elif self.board[i][j]==4:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#EFDC05")#yellow
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#EFDC05")#yellow
                 elif self.board[i][j]==5:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#A593E0")#purple
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#A593E0")#purple
                 elif self.board[i][j]==6:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#D4DFE6")#gray
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#D4DFE6")#gray
                 elif self.board[i][j]==7:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#F17F42")#orange
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40,fill="#F17F42")#orange
                 else:
-                    square=self.canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40)
+                    square=canvas.create_rectangle(j*40,i*40,j*40+40,i*40+40)
                 #print("test"+str(self.board[i][j]))
     
     def playFrame(self):

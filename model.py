@@ -540,14 +540,15 @@ class GameModel(Model):
     def Move(self, lorr):
         #print(self.board_state)
         tmp = []
-        
+        flag = False
         if lorr == 1:#right
         #check hit
             for x in self.falling_block:
                 var = x + 1
                 place = var % 8
                 if place == 0:
-                    return True#hit boarder, do nothing 
+                    flag = True
+                    break#hit boarder, do nothing 
                 else:
                     tmp.append(var)                
                     
@@ -557,21 +558,18 @@ class GameModel(Model):
                 var = x - 1
                 place = var % 8
                 if place == 7:
-                    return True#hit boarder, do nothing
+                    flag = True
+                    break#hit boarder, do nothing
                 else:
                     tmp.append(var)
                     
-                    
-        if self.Check_Frozen(tmp):#T hit, F not hit
-            self.board_state = self.frozen_board[:]#not hit
-                
-        else:#not hit, add frozen and falling into board
-            self.board_state = self.frozen_board[:]
-                
+        if not flag:
             self.falling_block = tmp
-            state = int(self.falling_class / 10)
-            for blc in self.falling_block:
-                self.board_state[blc] = state
+        self.board_state = self.frozen_board[:]
+        
+        state = int(self.falling_class / 10)
+        for blc in self.falling_block:
+            self.board_state[blc] = state
         #print(self.board_state)
             
     def Check_Frozen(self, temp):
@@ -597,42 +595,119 @@ class GameModel(Model):
     
                
     def Check_Erase(self):
-        chk_rowStart = []
-        for block in self.falling_block:
-            x = block % 8
-            start = block - x
-            if not (start in chk_rowStart):
-                chk_rowStart.append(start)#store all row start need to check
+        erase_number = 0
+        erase_row_start = []
+        temp_board = self.frozen_board[:]
+        state = int(self.falling_class / 10)
+        for blc in self.falling_block:
+            temp_board[blc] = state
+            
+        i = 0
+        flag = False
+        for i in range(15):
+            j = 0
+            flag = False
+            for j in range(8):
+                plc = i * 8 + j
+                if temp_board[plc] == 0:
+                    flag = True#empty board at row exist
+                    break
+            #store erase row
+            if not flag:
+                erase_number += 1
+                erase_row_start.append(i * 8)
                 
-        erase_row = []
-        for x in chk_rowStart:
-            i = 0
-            tmp = x
-            while not (self.frozen_board[tmp] == 0):
-                i += 1
-                tmp = x + i
-            if i >= self.board[0]:
-                erase_row.append(x)
-
-        #some row need to erase, move down upper block
-        if erase_row:
-            temp_board = self.frozen_board[:]
-            for rowX in erase_row:
-                i = 0
-                while i < rowX:
-                    temp_board[i + 8] = temp_board[i]
-
-
-        if len(erase_row) == 1:
+        if erase_number == 1:
+            s = erase_row_start[0]
+            i = s - 1
+            while i >= 0:
+                tmp = temp_board[i]
+                temp_board[i + 8] = tmp
+                i -= 1
+            
             self.point += 10
-        elif len(erase_row) == 2:
+                
+        elif erase_number == 2:
+            s_1 = erase_row_start[1]
+            s_0 = erase_row_start[0]
+            
+            i_0 = s_1 - 1
+            i_1 = s_0 + 8
+            i_2 = s_0 - 1
+            
+            while i_0 >= i_1:
+                tmp = temp_board[i_0]
+                temp_board[i_0 + 8] = tmp
+                i_0 -= 1
+            while i_2 >= 0:
+                tmp = temp_board[i_2]
+                temp_board[i_2 + 16] = tmp
+                i_2 -= 1
+                
             self.point += 30
-        elif len(erase_row) == 3:
+                
+        elif erase_number == 3:
+            s_0 = erase_row_start[0]
+            s_1 = erase_row_start[1]
+            s_2 = erase_row_start[2]
+            
+            i_0 = s_2 - 1
+            i_1 = s_1 + 8
+            i_2 = s_1 - 1
+            i_3 = s_0 + 8
+            i_4 = s_0 - 1
+            
+            while i_0 >= i_1:
+                tmp = temp_board[i_0]
+                temp_board[i_0 + 8] = tmp
+                i_0 -= 1
+            while i_2 >= i_3:
+                tmp = temp_board[i_2]
+                temp_board[i_2 + 16] = tmp
+                i_2 -= 1
+            while i_4 >= 0:
+                tmp = temp_board[i_4]
+                temp_board[i_4 + 24] = tmp
+                i_4 -= 1
+                
             self.point += 70
-        elif len(erase_row) == 4:
+                
+        elif erase_number == 4:
+            s_0 = erase_row_start[0]
+            s_1 = erase_row_start[1]
+            s_2 = erase_row_start[2]
+            s_3 = erase_row_start[3]
+            
+            i_0 = s_3 - 1
+            i_1 = s_2 + 8
+            i_2 = s_2 - 1
+            i_3 = s_1 + 8
+            i_4 = s_1 - 1
+            i_5 = s_0 + 8
+            i_6 = s_0 - 1
+            
+            while i_0 >= i_1:
+                tmp = temp_board[i_0]
+                temp_board[i_0 + 8] = tmp
+                i_0 -= 1
+            while i_2 >= i_3:
+                tmp = temp_board[i_2]
+                temp_board[i_2 + 16] = tmp
+                i_2 -= 1
+            while i_4 >= i_5:
+                tmp = temp_board[i_4]
+                temp_board[i_4 + 24] = tmp
+                i_4 -= 1
+            while i_6 >= 0:
+                tmp = temp_board[i_6]
+                temp_board[i_6 + 32] = tmp
+                i_6 -= 1
+            
             self.point += 150
         else:
             return
+        
+        self.frozen_board = temp_board[:]
 
     def New_Block(self):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
