@@ -83,8 +83,7 @@ class Control():
                             self.model.Turn()
                         elif key == "DOWN":
                             if not self.model.Fall_Down():
-                                self.view.state = "OVER"
-                                self.setstate("IDLE")
+                                self.setstate("OVER")
                             
                                 
                         elif key == "LEFT":
