@@ -195,10 +195,10 @@ class GameModel(Model):
         elif self.falling_class == 31:
             if(temp_Falling[0] % 8 == 0):
                 outCheck = False
-            temp_Falling[0] = temp_Falling[0] - 7
-            temp_Falling[1] = temp_Falling[1] - 7
-            temp_Falling[2] = temp_Falling[2] - 1
-            temp_Falling[3] = temp_Falling[3] + 6
+            temp_Falling[0] = temp_Falling[0] - 1
+            temp_Falling[1] = temp_Falling[1] - 1
+            temp_Falling[2] = temp_Falling[2] - 7
+            temp_Falling[3] = temp_Falling[3] - 7
 
 
             for i in self.frozen_board: 
@@ -248,7 +248,7 @@ class GameModel(Model):
             if(temp_Falling[0] % 8 == 7):
                 outCheck = False
             temp_Falling[0] = temp_Falling[0] - 1
-            temp_Falling[1] = temp_Falling[1] + 1
+            temp_Falling[1] = temp_Falling[1] - 1
             temp_Falling[2] = temp_Falling[2] + 7
             temp_Falling[3] = temp_Falling[3] - 7
 
@@ -352,7 +352,7 @@ class GameModel(Model):
             if(temp_Falling[0] % 8 == 0):
                 outCheck = False
             temp_Falling[0] = temp_Falling[0] + 1
-            temp_Falling[1] = temp_Falling[1] - 6
+            temp_Falling[1] = temp_Falling[1] + 6
             temp_Falling[2] = temp_Falling[2] - 1
             temp_Falling[3] = temp_Falling[3] - 8
 
