@@ -9,7 +9,7 @@ brick_dict = {
         20: [4,11,12,19], 21: [3,4,12,13],   # N2.
         30: [3,11,12,13], 31: [3,4,11,19], 32: [2,3,4,12], 33: [4,12,19,20], # L1.
         40: [4,10,11,12], 41: [3,11,19,20], 42: [3,4,5,11], 43: [3,4,12,20], # L2.
-        50: [3,4,5,12], 51: [3,11,12,19], 52: [4,10,11,12], 53: [5,12,13,21], # T.
+        50: [3,4,5,12], 51: [3,11,12,19], 52: [4,11,12,13], 53: [5,12,13,21], # T.
         60: [3,4,11,12],    # O.
         70: [3,11,19,27], 71: [2,3,4,5]    #I.
 }
@@ -513,9 +513,7 @@ class GameModel(Model):
             elif(temp_Falling[0] % 8 == 7):
                 outCheck = False
             temp_Falling[0] = temp_Falling[0] + 1
-            temp_Falling[1] = temp_Falling[1] - 1
-            temp_Falling[2] = temp_Falling[2] - 1
-            temp_Falling[3] = temp_Falling[3] + 7
+            temp_Falling[3] = temp_Falling[3] - 6
 
 
             if(self.frozen_board[temp_Falling[0]]>0):
@@ -546,9 +544,9 @@ class GameModel(Model):
             
         elif self.falling_class == 52:
             temp_Falling[0] = temp_Falling[0] + 1
-            temp_Falling[1] = temp_Falling[1] + 2
-            temp_Falling[2] = temp_Falling[2] + 2
-            temp_Falling[3] = temp_Falling[3] + 9
+            temp_Falling[1] = temp_Falling[1] + 1
+            temp_Falling[2] = temp_Falling[2] + 1
+            temp_Falling[3] = temp_Falling[3] + 8
 
 
             if(self.frozen_board[temp_Falling[0]]>0):
