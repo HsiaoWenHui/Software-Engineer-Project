@@ -85,6 +85,9 @@ class Application(tkinter.Frame):
         
     def updateGame(self):
         #print("update")
+        self.canvas.place_forget()
+        self.canvas.place(x=18,y=45,width=320,height=600,anchor='nw')
+        outside=self.canvas.create_rectangle(0,0,320,600)
         self.score.config(text="score : "+str(self.mod.point))
         self.score.place(x=0,y=0,anchor='nw')
       
@@ -201,5 +204,6 @@ class Application(tkinter.Frame):
         self.gamestate="UP"
     def down_key(self,event):
         self.gamestate="DOWN"
-        
+    def clear_key(self):
+        self.gamestate=""    
 

@@ -72,7 +72,7 @@ class Control():
                 #print (timepass)
                 
                 if timepass > (1):
-                    print(self.model.frozen_board)
+                    #s(self.model.frozen_board)
                     if self.model.Fall_Down():                        
                         timer = time.time()
                         self.view.updateGame()
@@ -97,6 +97,7 @@ class Control():
                             self.model.Move(-1)
                         elif key == "RIGHT":
                             self.model.Move(1)
+                        self.view.clear_key()
                     self.view.updateGame()
                 #if self.getkeyinput()!="NULL":
                    # self.model.move()

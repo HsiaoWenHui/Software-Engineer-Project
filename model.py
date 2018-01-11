@@ -473,7 +473,7 @@ class GameModel(Model):
                 self.falling_class -= 1
             
     def Move(self, lorr):
-        print(self.board_state)
+        #print(self.board_state)
         tmp = []
         
         if lorr == 1:#right
@@ -507,7 +507,7 @@ class GameModel(Model):
             state = int(self.falling_class / 10)
             for blc in self.falling_block:
                 self.board_state[blc] = state
-        print(self.board_state)
+        #print(self.board_state)
             
     def Check_Frozen(self, temp):
         flag = False
@@ -585,7 +585,7 @@ class GameModel(Model):
             
     
     def Fall_Down(self):
-        print(self.board_state)
+        #print(self.board_state)
         temp = []#next place
         temp.append(self.falling_block[0] + 8)
         temp.append(self.falling_block[1] + 8)
