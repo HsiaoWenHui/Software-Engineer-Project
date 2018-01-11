@@ -6,12 +6,10 @@ import tkinter.messagebox
 #from tkinter.constants import ANCHOR
 from PIL.ImageTk import PhotoImage
 #from django.utils.termcolors import background
-import model
 #from doctest import master
 import numpy as np
-    
-class Application(tkinter.Frame):
-    def __init__(self, master,model):
+class ParentView(tkinter.Frame):
+    def __init__(self, master, model):
         self.mod=model
         tkinter.Frame.__init__(self, master)
         self.master.minsize(width=352, height=660)
@@ -19,37 +17,13 @@ class Application(tkinter.Frame):
         self.state=""
         self.gamestate=""
         self.scoreText="0"
-        self.playImage=PhotoImage(file='./play.png')
-        self.setImage=PhotoImage(file='./settings.png')
-        self.setImage2=PhotoImage(file='./settings2.png')
-        self.logoImage=PhotoImage(file='./logo.png')
-        self.pauseImage=PhotoImage(file='./pause.png')
-        self.cancelImage=PhotoImage(file='./cancel.png')
-        self.restartImage=PhotoImage(file='./restart.png')
-        self.master.config(bg="black")
-        
-        self.inputText = tkinter.Label(master,image=self.logoImage,text="tetris",bg="black")
-        self.score=tkinter.Label(master,font=('Arial,80'),width=15,height=2,text="score : "+self.scoreText,bg="black",fg="white")
-        self.playButton=tkinter.Button(master,image=self.playImage,text='PLAY',width=50,height=50,command=self.play,bg="#0096E6")
-    
-        self.settingButton=tkinter.Button(master,image=self.setImage,text='SET',width=50,height=50,command=self.set,bg="#0096E6")
-        self.pauseButton=tkinter.Button(master,image=self.pauseImage,text='PAUSE',width=30,height=30,command=self.pause,bg="black")
-        self.restartButton=tkinter.Button(master,image=self.restartImage,text='RESTART',width=80,height=80,command=self.restart,bg="#0096E6")
-        self.cancelButton=tkinter.Button(master,image=self.cancelImage,text='CANCEL',width=80,height=80,command=self.cancel,bg="#0096E6")
-        self.canvas=tkinter.Canvas(width=320,height=600,bg="#FFFFF3")
-        self.panel=tkinter.StringVar()
-        self.panel1=tkinter.Radiobutton(text='1',font=('Arial,100'),variable=self.panel,value='1',command=self.panelchange,bg="black",fg="white")
-        self.panel2=tkinter.Radiobutton(text='2',font=('Arial,100'),variable=self.panel,value='2',command=self.panelchange,bg="black",fg="white")
-        self.panel3=tkinter.Radiobutton(text='3',font=('Arial,100'),variable=self.panel,value='3',command=self.panelchange,bg="black",fg="white")
-        self.changPanel=tkinter.Label(master,font=('Arial,80'),width=15,height=2,text="Choose Panel",bg="black",fg="white")
         
         self.master.bind('<Left>', self.left_key)
         self.master.bind('<Right>', self.right_key)
         self.master.bind('<Up>', self.up_key)
         self.master.bind('<Down>', self.down_key)
         self.board= np.zeros([15,8])
-        self.startFrame()
-
+        
     def changeView(self,state):
             self.clear()
             print("change"+self.state)
@@ -76,9 +50,82 @@ class Application(tkinter.Frame):
             else:
                 self.startFrame()
                 
+    def getUserInput(self):
+        return self.state
+    
+    def gameinput(self):
+        temp=self.gamestate
+        print(temp)
+        self.gamestate=""
+        return temp
+        
+    def over(self):
+        self.state="IDLE"
+        tkinter.messagebox.showinfo("Tetris", "Game Over")
+        
+    def play(self):
+        print("viewPlay")
+        self.state='PLAY'
+        
+    def set(self):
+        print("viewSet")
+        self.state='SET'
+       
+    def pause(self):
+        self.state='PAUSE'
+        
+    def cancel(self):
+        if(self.state=="SET"):
+            self.state='IDLE'
+            
+        elif(self.state=="PAUSE"):
+            self.state='PLAY'
+            
+    def restart(self):
+        self.state="IDLE"
+    def left_key(self,event):
+        self.gamestate="LEFT"
+    def right_key(self,event):
+        self.gamestate="RIGHT"
+    def up_key(self,event):
+        self.gamestate="UP"
+    def down_key(self,event):
+        self.gamestate="DOWN"
+    def clear_key(self):
+        self.gamestate=""
+    
+class Application(ParentView):
+    def __init__(self, master,model):
+        super().__init__(master, model)
+        
+        self.playImage=PhotoImage(file='./play.png')
+        self.setImage=PhotoImage(file='./settings.png')
+        self.setImage2=PhotoImage(file='./settings2.png')
+        self.logoImage=PhotoImage(file='./logo.png')
+        self.pauseImage=PhotoImage(file='./pause.png')
+        self.cancelImage=PhotoImage(file='./cancel.png')
+        self.restartImage=PhotoImage(file='./restart.png')
+        self.master.config(bg="black")
+        
+        self.inputText = tkinter.Label(master,image=self.logoImage,text="tetris",bg="black")
+        self.score=tkinter.Label(master,font=('Arial,80'),width=15,height=2,text="score : "+self.scoreText,bg="black",fg="white")
+        self.playButton=tkinter.Button(master,image=self.playImage,text='PLAY',width=50,height=50,command=self.play,bg="#0096E6")
+    
+        self.settingButton=tkinter.Button(master,image=self.setImage,text='SET',width=50,height=50,command=self.set,bg="#0096E6")
+        self.pauseButton=tkinter.Button(master,image=self.pauseImage,text='PAUSE',width=30,height=30,command=self.pause,bg="black")
+        self.restartButton=tkinter.Button(master,image=self.restartImage,text='RESTART',width=80,height=80,command=self.restart,bg="#0096E6")
+        self.cancelButton=tkinter.Button(master,image=self.cancelImage,text='CANCEL',width=80,height=80,command=self.cancel,bg="#0096E6")
+        self.canvas=tkinter.Canvas(width=320,height=600,bg="#FFFFF3")
+                                   
+        self.panel=tkinter.StringVar()
+        self.panel1=tkinter.Radiobutton(text='1',font=('Arial,100'),variable=self.panel,value='1',command=self.panelchange,bg="black",fg="white")
+        self.panel2=tkinter.Radiobutton(text='2',font=('Arial,100'),variable=self.panel,value='2',command=self.panelchange,bg="black",fg="white")
+        self.panel3=tkinter.Radiobutton(text='3',font=('Arial,100'),variable=self.panel,value='3',command=self.panelchange,bg="black",fg="white")
+        self.changPanel=tkinter.Label(master,font=('Arial,80'),width=15,height=2,text="Choose Panel",bg="black",fg="white")
+        
+        self.startFrame()
+                
     def startFrame(self):
-        
-        
         self.playButton.place(x=176,y=300,anchor='center')
         self.settingButton.place(x=176,y=400,anchor='center')
         self.inputText.place(x=176,y=100,anchor='n')
@@ -123,20 +170,15 @@ class Application(tkinter.Frame):
                 #print("test"+str(self.board[i][j]))
     
     def playFrame(self):
-        
-        
         self.canvas.place(x=18,y=45,width=320,height=600,anchor='nw')
         self.pauseButton.place(x=176,y=5,anchor='n')
         outside=self.canvas.create_rectangle(0,0,320,600)#每格40
         
         
-    
     def pauseFrame(self):
-        
         self.restartButton.place(x=176,y=200,anchor='center')
         self.cancelButton.place(x=176,y=300,anchor='center')
         
-    
         
     def setFrame(self):
         self.changPanel.place(x=176,y=150,anchor='center')
@@ -162,49 +204,6 @@ class Application(tkinter.Frame):
         self.panel2.place_forget()
         self.panel3.place_forget()
     
-    def getUserInput(self):
-        return self.state
-    def gameinput(self):
-        temp=self.gamestate
-        print(temp)
-        self.gamestate=""
-        return temp
-        
-    def over(self):
-        self.state="IDLE"
-        tkinter.messagebox.showinfo("Tetris", "Game Over")
-        
-        
-    def play(self):
-        print("viewPlay")
-        self.state='PLAY'
-        
-    def set(self):
-        print("viewSet")
-        self.state='SET'
-       
-    def pause(self):
-        self.state='PAUSE'
         
     def panelchange(self):
         print (self.view.get()+" button pressed")
-    def cancel(self):
-        if(self.state=="SET"):
-            self.state='IDLE'
-            
-        elif(self.state=="PAUSE"):
-            self.state='PLAY'
-            
-    def restart(self):
-        self.state="IDLE"
-    def left_key(self,event):
-        self.gamestate="LEFT"
-    def right_key(self,event):
-        self.gamestate="RIGHT"
-    def up_key(self,event):
-        self.gamestate="UP"
-    def down_key(self,event):
-        self.gamestate="DOWN"
-    def clear_key(self):
-        self.gamestate=""    
-
