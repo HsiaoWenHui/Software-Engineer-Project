@@ -557,7 +557,7 @@ class GameModel(Model):
             for x in self.falling_block:
                 var = x - 1
                 place = var % 8
-                if (place == 0) or (self.frozen_board[var] != 0):
+                if (place == 7) or (self.frozen_board[var] != 0):
                     flag = True
                     break#hit boarder, do nothing
                 else:
