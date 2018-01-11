@@ -505,9 +505,7 @@ class GameModel(Model):
 
             
         elif self.falling_class == 51:
-            if(temp_Falling[0] % 8 == 6):
-                outCheck = False
-            elif(temp_Falling[0] % 8 == 7):
+            if(temp_Falling[0] % 8 == 7):
                 outCheck = False
             temp_Falling[0] = temp_Falling[0] + 7
             temp_Falling[1] = temp_Falling[1] + 1
@@ -572,8 +570,6 @@ class GameModel(Model):
 
         elif self.falling_class == 53:
             if(temp_Falling[0] % 8 == 0):
-                outCheck = False
-            elif(temp_Falling[0] % 8 == 1):
                 outCheck = False
             temp_Falling[1] = temp_Falling[1] - 1
             temp_Falling[2] = temp_Falling[2] - 1
