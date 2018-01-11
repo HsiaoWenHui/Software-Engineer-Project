@@ -16,8 +16,7 @@ class Control():
         self.root.title("Tetris")
         self.model = model.GameModel()
         self.view = view.Application(self.root, self.model)
-        self.fflag = False
-        self.flag = False
+        self.viewflag = 1
         self.input = False
         self.state = "NULL"
         
@@ -46,10 +45,6 @@ class Control():
     #檢查掉落結束
 #    def finishcheck(self):
  #       return self.model.finishflag()
-    def finishcheck(self):
-        return self.flag
-    def finish(self):
-        return self.fflag
 
     def start(self):
         
@@ -102,7 +97,19 @@ class Control():
                    # self.model.move()
                # if not self.model.Play():
                   #  self.setstate("OVER")
-            
+            elif self.state == "SET":
+                if self.viewflag != self.view.viewflag:
+                    print("nowchange" + str(self.viewflag))
+                    if self.view.viewflag == 1:
+                        self.view.clear()
+                        self.view = view.Application(self.root,self.model)
+                        self.viewflag = 1
+                        print ("viewflag"+str(self.viewflag))
+                    elif self.view.viewflag == 2:
+                        self.view.clear()
+                        self.view = view.View2(self.root,self.model)
+                        self.viewflag = 2
+                        print ("viewflag"+str(self.viewflag))
             self.root.update()
                     
 
