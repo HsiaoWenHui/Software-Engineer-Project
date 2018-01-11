@@ -8,7 +8,7 @@ brick_dict = {
         20: [4,11,12,19], 21: [3,4,12,13],   # N2.
         30: [3,11,12,13], 31: [3,4,11,19], 32: [2,3,4,12], 33: [4,12,19,20], # L1.
         40: [4,10,11,12], 41: [3,11,19,20], 42: [3,4,5,11], 43: [3,4,12,20], # L2.
-        50: [3,4,5,12], 51: [3,11,12,19], 52: [3,10,11,12], 53: [4,11,12,20],# T.
+        50: [3,4,5,12], 51: [3,11,12,19], 52: [4,11,12,20], 53: [3,10,11,12], # T.
         60: [3,4,11,12],    # O.
         70: [3,11,19,27], 71: [2,3,4,5]    #I.
 }
@@ -717,6 +717,10 @@ class GameModel(Model):
                 tmp = temp_board[i]
                 temp_board[i + 8] = tmp
                 i -= 1
+            bu = 0
+            while bu < 8:
+                temp_board[bu] = 0
+                bu += 1
             
             self.point += 10
                 
@@ -736,6 +740,10 @@ class GameModel(Model):
                 tmp = temp_board[i_2]
                 temp_board[i_2 + 16] = tmp
                 i_2 -= 1
+            bu = 0
+            while bu < 16:
+                temp_board[bu] = 0
+                bu += 1
                 
             self.point += 30
                 
@@ -762,6 +770,10 @@ class GameModel(Model):
                 tmp = temp_board[i_4]
                 temp_board[i_4 + 24] = tmp
                 i_4 -= 1
+            bu = 0
+            while bu < 24:
+                temp_board[bu] = 0
+                bu += 1
                 
             self.point += 70
                 
@@ -795,6 +807,10 @@ class GameModel(Model):
                 tmp = temp_board[i_6]
                 temp_board[i_6 + 32] = tmp
                 i_6 -= 1
+            bu = 0
+            while bu < 32:
+                temp_board[bu] = 0
+                bu += 1
             
             self.point += 150
         else:
@@ -804,6 +820,7 @@ class GameModel(Model):
 
     def New_Block(self):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
+        
         self.falling_block.clear()
         self.falling_block = brick_dict[self.falling_class]
         
