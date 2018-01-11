@@ -8,7 +8,6 @@ import view
 import model
 import tkinter
 import time
-from _overlapped import NULL
 
 class Control():    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
@@ -16,7 +15,7 @@ class Control():
         self.root = tkinter.Tk()
         self.root.title("Tetris")
         self.model = model.GameModel()
-        self.view = view.Application(self.root,self.model)
+        self.view = view.Application(self.root, self.model)
         self.fflag = False
         self.flag = False
         self.input = False
