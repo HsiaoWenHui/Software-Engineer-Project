@@ -66,7 +66,7 @@ class GameModel(Model):
         temp_Falling = list(self.falling_block) #複製原始block位置
         outCheck = True
         if self.falling_class == 10 :
-            elif(temp_Falling[0] % 8 == 0):
+            if(temp_Falling[0] % 8 == 0):
                 outCheck =False
             temp_Falling[1] = temp_Falling[1] - 7
             temp_Falling[2] = temp_Falling[2] - 2
