@@ -83,9 +83,19 @@ class GameModel(Model):
                         
             #若沒有撞到frozen或是邊緣則可進行旋轉
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+            
             
         
         elif self.falling_class == 11:
@@ -104,10 +114,19 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
-                    self.falling_class -= 1
-                    self.falling_block[i] = temp_Falling[i] 
-            
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶            
+                    self.falling_class -= 1           
+        
         elif self.falling_class == 20:
             if(temp_Falling[0] % 8 == 7):
                 outCheck = False
@@ -125,10 +144,18 @@ class GameModel(Model):
                     outCheck = False
             
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i] 
-
                         
         elif self.falling_class == 21:
             temp_Falling[0] = temp_Falling[0] + 1
@@ -146,9 +173,18 @@ class GameModel(Model):
                     
                     
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class -= 1
-                    self.falling_block[i] = temp_Falling[i] 
 
 
         elif self.falling_class == 30:
@@ -167,9 +203,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i] 
             
             
         elif self.falling_class == 31:
@@ -191,10 +236,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
-            return self.falling_block[i]
 
             
         elif self.falling_class == 32:
@@ -214,9 +267,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
             
 
         elif self.falling_class == 33:
@@ -238,9 +300,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class -= 3
-                    self.falling_block[i] = temp_Falling[i]
 
             
         elif self.falling_class == 40:
@@ -260,9 +331,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
             
 
         elif self.falling_class == 41:
@@ -283,11 +363,20 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
-
             
+        
         elif self.falling_class == 42:
             temp_Falling[2] = temp_Falling[2] + 7
             temp_Falling[3] = temp_Falling[3] + 9
@@ -303,9 +392,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
             
 
         elif self.falling_class == 43:
@@ -327,9 +425,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class -= 3
-                    self.falling_block[i] = temp_Falling[i]
 
             
         elif self.falling_class == 50:
@@ -348,9 +455,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
 
             
         elif self.falling_class == 51:
@@ -372,9 +488,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
             
             
         elif self.falling_class == 52:
@@ -394,9 +519,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
-                    self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                        self.falling_class += 1
 
 
         elif self.falling_class == 53:
@@ -418,9 +552,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
-                    self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i] 
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                    self.falling_class -= 3
 
         
         elif self.falling_class == 70:
@@ -447,9 +590,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class += 1
-                    self.falling_block[i] = temp_Falling[i]
             
 
         elif self.falling_class == 71:
@@ -469,9 +621,18 @@ class GameModel(Model):
 
 
             if(outCheck):
-                for i in range(4):
+                if(self.Check_Frozen(temp_Falling[i])):
+                    self.board_state = self.frozen_board[:]
+                    return self.New_Block()
+                
+                else:
+                    self.falling_block = temp_Falling[i]
+                    state = int(self.falling_class / 10)
+                    for i in self.falling_block:
+                        self.board_state[i]=state;
+                    for i in range(4):
+                        self.falling_block[i] = temp_Falling[i] #將假定值帶入
                     self.falling_class -= 1
-                    self.falling_block[i] = temp_Falling[i] 
             
     def Move(self, lorr):
         print(self.board_state)
