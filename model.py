@@ -75,7 +75,7 @@ class GameModel(Model):
             #檢查是否在冷凍版上
             for i in self.frozen_board: 
                 for j in temp_Falling:
-                    if(j == i):
+                    if self.frozen_board[j]>0:
                         outCheck = False
             for i in temp_Falling:
                 if((i / 8) > board_long):
@@ -557,11 +557,13 @@ class GameModel(Model):
             for x in self.falling_block:
                 var = x - 1
                 place = var % 8
-                if place == 7:
+                if place == 0:
                     flag = True
                     break#hit boarder, do nothing
                 else:
                     tmp.append(var)
+        else:
+            return
                     
         if not flag:
             self.falling_block = tmp
