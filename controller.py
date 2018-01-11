@@ -109,6 +109,16 @@ class Control():
                         self.view = view.View2(self.root,self.model)
                         self.viewflag = 2
                         print ("viewflag"+str(self.viewflag))
+                    elif self.view.viewflag == 3:
+                        self.view.clear()
+                        self.view = view.View_HU(self.root,self.model)
+                        self.viewflag = 3
+                        print ("viewflag"+str(self.viewflag))
+                    elif self.view.viewflag == 4:
+                        self.view.clear()
+                        self.view = view.View4(self.root,self.model)
+                        self.viewflag = 4
+                        print ("viewflag"+str(self.viewflag))
             self.root.update()
                     
 
