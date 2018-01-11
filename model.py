@@ -73,13 +73,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 9
             
             #檢查是否在冷凍版上
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             #檢查是否超出底線
@@ -105,13 +105,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 9
             
             
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -136,13 +136,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 6
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -164,13 +164,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 6
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -194,13 +194,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 6
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -227,13 +227,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 7
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -257,13 +257,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 8
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -289,13 +289,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 7
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -320,13 +320,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 8
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -351,13 +351,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 9
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -380,13 +380,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 9
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -413,13 +413,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 8
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -443,13 +443,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 7
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -475,13 +475,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 1
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -505,13 +505,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 8
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -538,13 +538,13 @@ class GameModel(Model):
             temp_Falling[2] = temp_Falling[2] - 6
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -576,13 +576,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] - 22
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
@@ -606,13 +606,13 @@ class GameModel(Model):
             temp_Falling[3] = temp_Falling[3] + 22
 
 
-            if(self.frozen_board[temp_Falling[0]]>0)
+            if(self.frozen_board[temp_Falling[0]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[1]]>0)
+            elif(self.frozen_board[temp_Falling[1]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[2]]>0)
+            elif(self.frozen_board[temp_Falling[2]]>0):
                 outCheck = False
-            elif(self.frozen_board[temp_Falling[3]]>0)
+            elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
             for i in temp_Falling:
