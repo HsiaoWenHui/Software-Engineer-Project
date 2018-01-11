@@ -162,6 +162,7 @@ class Application(tkinter.Frame):
         return self.state
     def gameinput(self):
         temp=self.gamestate
+        print(temp)
         self.gamestate=""
         return temp
         

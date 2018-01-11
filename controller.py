@@ -8,6 +8,7 @@ import view
 import model
 import tkinter
 import time
+from _overlapped import NULL
 
 class Control():    
     #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
@@ -63,11 +64,9 @@ class Control():
                 if button == "PLAY":
                     timer = time.time()
                 if button == ("IDLE"):
-                    self.model = model.GameModel()
+                    self.model.__init__()
                     self.view.mod = self.model
-                if button == ("OVER"):
-                    self.model = model.GameModel()
-                    self.view.mod = self.model
+                
             elif self.state == "PLAY":  
                 timepass = float(time.time()-timer)
                 #print (timepass)
@@ -79,7 +78,7 @@ class Control():
                         self.view.updateGame()
                     else:
                         self.setstate("OVER")
-                        self.view.state = "IDEL"
+                        self.view.state = "IDLE"
     
                     
                 else:
