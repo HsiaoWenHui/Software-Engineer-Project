@@ -509,7 +509,7 @@ class GameModel(Model):
         elif self.falling_class == 51:
             if(temp_Falling[0] % 8 == 0):
                 outCheck = False
-            temp_Falling[0] = temp_Falling[0] - 7
+            temp_Falling[0] = temp_Falling[0] + 7
 
 
             if(self.frozen_board[temp_Falling[0]]>0):
