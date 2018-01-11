@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import copy
 
 # 定義磚塊.
 brick_dict = {
@@ -63,7 +64,7 @@ class GameModel(Model):
         self.New_Block()
         
     def Turn(self):
-        temp_Falling = list(self.falling_block) #複製原始block位置
+        temp_Falling = copy.deepcopy(self.falling_block) #複製原始block位置
         outCheck = True
         if self.falling_class == 10 :
             if(temp_Falling[0] % 8 == 0):
@@ -94,9 +95,8 @@ class GameModel(Model):
                         
             #若沒有撞到frozen或是邊緣則可進行旋轉
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -129,9 +129,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist      
@@ -163,9 +162,8 @@ class GameModel(Model):
                     outCheck = False
             
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -196,9 +194,8 @@ class GameModel(Model):
                     
                     
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist   
@@ -230,9 +227,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -266,9 +262,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -300,9 +295,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -337,9 +331,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -371,9 +364,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist    
@@ -407,9 +399,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -440,9 +431,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -477,9 +467,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -510,9 +499,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -546,9 +534,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist   
@@ -581,9 +568,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist   
@@ -618,9 +604,8 @@ class GameModel(Model):
 
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -659,9 +644,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
@@ -693,9 +677,8 @@ class GameModel(Model):
                     outCheck = False
 
             if(outCheck):
-                self.board_state = self.frozen_board[:]
-                for i in range(4):
-                    self.falling_block[i] = temp_Falling[i] #將假定值帶入
+                self.board_state = list(self.frozen_board)
+                self.falling_block = list(temp_Falling)
                 state = int(self.falling_class / 10)
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
