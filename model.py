@@ -82,8 +82,13 @@ class GameModel(Model):
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
                 
+            #如果小於零則無法改位置    
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                
             #檢查是否超出底線
-            for i in temp_Falling:
+            for i in temp_Falling:  
                 if((i / 8) > board_long):
                     outCheck = False
                         
@@ -113,7 +118,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+               
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -144,7 +153,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -172,7 +185,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -202,7 +219,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -235,7 +256,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -265,7 +290,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -297,7 +326,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -328,7 +361,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -359,7 +396,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -388,7 +429,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -421,7 +466,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -451,7 +500,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -483,7 +536,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -513,7 +570,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -546,7 +607,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -584,7 +649,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+             
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                          
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
@@ -614,7 +683,11 @@ class GameModel(Model):
                 outCheck = False
             elif(self.frozen_board[temp_Falling[3]]>0):
                 outCheck = False
-                
+            
+            for i in range(4): 
+                if(temp_Falling[i] < 0):
+                    outCheck = False
+                           
             for i in temp_Falling:
                 if((i / 8) > board_long):
                     outCheck = False
