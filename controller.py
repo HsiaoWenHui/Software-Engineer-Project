@@ -62,7 +62,10 @@ class Control():
                 self.setstate(button)
                 if button == "PLAY":
                     timer = time.time()
-                if button == "IDLE":
+                if button == ("IDLE"):
+                    self.model = model.GameModel()
+                    self.view.mod = self.model
+                if button == ("OVER"):
                     self.model = model.GameModel()
                     self.view.mod = self.model
             elif self.state == "PLAY":  

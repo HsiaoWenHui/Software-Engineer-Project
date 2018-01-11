@@ -161,8 +161,10 @@ class Application(tkinter.Frame):
     def getUserInput(self):
         return self.state
     def gameinput(self):
-        return self.gamestate
+        temp=self.gamestate
         self.gamestate=""
+        return temp
+        
     def over(self):
         self.state="IDLE"
         tkinter.messagebox.showinfo("Tetris", "Game Over")
