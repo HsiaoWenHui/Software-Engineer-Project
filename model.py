@@ -67,7 +67,9 @@ class GameModel(Model):
         outCheck = True
         if self.falling_class == 10 :
             if(temp_Falling[0] % 8 == 6):
-                outCheck = False              
+                outCheck = False
+            elif(temp_Falling[0] % 8 == 7):
+                outCheck =False
             temp_Falling[1] = temp_Falling[1] - 7
             temp_Falling[2] = temp_Falling[2] - 2
             temp_Falling[3] = temp_Falling[3] - 9
