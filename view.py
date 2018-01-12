@@ -439,14 +439,10 @@ class View2(ParentView):
 class View_HU(ParentView):
     def __init__(self, master,model):
         super().__init__(master, model)
-        im_temp = PIL.Image.open("HU_logo.png")
-        im_temp = im_temp.resize((258, 147), PIL.Image.ANTIALIAS)
-        im_temp.save("HU_logo1.png", "png")
-        
         self.playImage=PhotoImage(file='./HU_play.png')
         self.setImage=PhotoImage(file='./HU_set.png')
         self.setImage2=PhotoImage(file='./HU_set.png')
-        self.logoImage=PhotoImage(file='./HU_logo1.png')
+        self.logoImage=PhotoImage(file='./HU_logo.png')
         self.pauseImage=PhotoImage(file='./HU_pause.png')
         self.cancelImage=PhotoImage(file='./cancel.png')
         self.restartImage=PhotoImage(file='./restart.png')
