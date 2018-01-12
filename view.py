@@ -568,8 +568,8 @@ class View4(ParentView):
         self.master.config(bg="blue")
         
         self.inputText = tkinter.Label(master,image=self.logoImage,text="tetris",bg="gray")
-        self.score=tkinter.Label(master,font=("Arial", 15,"bold"),width=11,height=2,text="score : "+self.scoreText,bg="black",fg="white")
-        self.playButton=tkinter.Button(master,image=self.playImage,text='PLAY',width=50,height=50,command=self.play,bg="gray")
+        self.score=tkinter.Label(master,font=("Arial", 15,"bold"),width=11,height=2,text="score : "+self.scoreText,bg="blue",fg="white")
+        self.playButton=tkinter.Button(master,image=self.playImage,text='PLAY',width=50,height=50,command=self.play,bg="blue")
     
         self.settingButton=tkinter.Button(master,image=self.setImage,text='SET',width=50,height=50,command=self.set,bg="blue")
         self.pauseButton=tkinter.Button(master,image=self.pauseImage,text='PAUSE',width=30,height=30,command=self.pause,bg="blue")
