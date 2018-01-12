@@ -581,10 +581,10 @@ class View4(ParentView):
                     
         
         self.panel=tkinter.StringVar()
-        self.panel1=tkinter.Radiobutton(text='1',font=('Arial',50),variable=self.panel,value='1',command=self.panelchange,bg="blue",fg="white")
-        self.panel2=tkinter.Radiobutton(text='2',font=('Arial',50),variable=self.panel,value='2',command=self.panelchange,bg="blue",fg="white")
-        self.panel3=tkinter.Radiobutton(text='3',font=('Arial',50),variable=self.panel,value='3',command=self.panelchange,bg="blue",fg="white")
-        self.panel4=tkinter.Radiobutton(text='4',font=('Arial',13),variable=self.panel,value='4',command=self.panelchange,bg="blue",fg="white")
+        self.panel1=tkinter.Radiobutton(text='1',font=('Arial',20),variable=self.panel,value='1',command=self.panelchange,bg="blue",fg="white")
+        self.panel2=tkinter.Radiobutton(text='2',font=('Arial',20),variable=self.panel,value='2',command=self.panelchange,bg="blue",fg="white")
+        self.panel3=tkinter.Radiobutton(text='3',font=('Arial',20),variable=self.panel,value='3',command=self.panelchange,bg="blue",fg="white")
+        self.panel4=tkinter.Radiobutton(text='4',font=('Arial',20),variable=self.panel,value='4',command=self.panelchange,bg="blue",fg="white")
         self.changPanel=tkinter.Label(master,font=('Arial',20),width=15,height=2,text="Choose Panel",bg="blue",fg="white")
         self.viewflag=4
         self.startFrame()
