@@ -586,7 +586,7 @@ class View4(ParentView):
         self.panel3=tkinter.Radiobutton(text='3',font=('Arial',50),variable=self.panel,value='3',command=self.panelchange,bg="blue",fg="white")
         self.panel4=tkinter.Radiobutton(text='4',font=('Arial',13),variable=self.panel,value='4',command=self.panelchange,bg="blue",fg="white")
         self.changPanel=tkinter.Label(master,font=('Arial',20),width=15,height=2,text="Choose Panel",bg="blue",fg="white")
-        self.viewflag=3
+        self.viewflag=4
         self.startFrame()
                 
     def startFrame(self):
