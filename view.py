@@ -2,11 +2,7 @@
 
 import tkinter
 import tkinter.messagebox
-#from distutils.dist import command_re
-#from tkinter.constants import ANCHOR
 from PIL.ImageTk import PhotoImage
-#from django.utils.termcolors import background
-#from doctest import master
 import numpy as np
 class ParentView(tkinter.Frame):
     def __init__(self, master, model):
@@ -50,16 +46,17 @@ class ParentView(tkinter.Frame):
                 
             else:
                 self.startFrame()
-    ＃回傳狀態            
+                
+＃回傳狀態            
     def getUserInput(self):
         return self.state
-    ＃回傳鍵盤輸入狀態
+＃回傳鍵盤輸入狀態
     def gameinput(self):
         temp=self.gamestate
         print(temp)
         self.gamestate=""
         return temp
-    ＃遊戲結束跳出通知視窗   
+＃遊戲結束跳出通知視窗   
     def over(self):
         self.state="IDLE"
         tkinter.messagebox.showinfo("Tetris", "Game Over")
