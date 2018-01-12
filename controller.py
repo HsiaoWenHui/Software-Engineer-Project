@@ -42,9 +42,6 @@ class Control():
     
     def getkeyinput(self):
         return self.view.gameinput()
-    #檢查掉落結束
-#    def finishcheck(self):
- #       return self.model.finishflag()
 
     def start(self):
         
@@ -65,7 +62,7 @@ class Control():
                 timepass = float(time.time()-timer)
                 #print (timepass)
                 
-                if timepass > (0.5):
+                if timepass > (0.5): #掉落計時器
                     #s(self.model.frozen_board)
                     if self.model.Fall_Down():                        
                         timer = time.time()
@@ -96,7 +93,7 @@ class Control():
                    # self.model.move()
                # if not self.model.Play():
                   #  self.setstate("OVER")
-            elif self.state == "SET":
+            elif self.state == "SET":#更改使用viewclass
                 if self.viewflag != self.view.viewflag:
                     print("nowchange" + str(self.viewflag))
                     if self.view.viewflag == 1:
@@ -120,26 +117,6 @@ class Control():
                         self.viewflag = 4
                         print ("viewflag"+str(self.viewflag))
             self.root.update()
-                    
 
-    
-    def check(self):
-        self.setstate("CHECK")
-
-    def pause(self):
-        self.setstate("PAUSE")
-        
-    def setting(self):
-        self.setstate("SET")
-
-"""
-root = tkinter.Tk()
-root.title("Tetris")
-m=model.GameModel()
-v=view.Application(root,m)
-
-c=Control(m,v)
-root.mainloop()
-"""
 c=Control()
 c.start()
