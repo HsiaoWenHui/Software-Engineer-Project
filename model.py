@@ -19,7 +19,7 @@ class Model:
     def __init__(self, lv = 5):
         self.speed = lv
         self.state = "IDLE"
-        
+        # Let controller call and change state
     def Set_State(self, newState):
         if newState == "PLAY":
             self.state = "PLAY"
@@ -46,21 +46,26 @@ class Model:
     
 class GameModel(Model):
     def __init__(self, lv = 5):
+        #call parent's constructure
         super().__init__(lv)
+        
+        #store the type of falling block and its place
         self.falling_block = []
         self.falling_class =0
         
+        #store the play ground, initial size to 8 * 15 and value for print initial to 0
         self.board = (8,15)# x,y
         self.board_state = []#print mode
         self.frozen_board = []#frozen check
         self.point = 0
         
-        #all board state
+        #all board state initial
         size = 120
         for i in range(0,size):
             self.board_state.append(0)
             self.frozen_board.append(0)
             
+        #create first block 
         self.New_Block()
         
     def Turn(self):
@@ -681,21 +686,24 @@ class GameModel(Model):
                 for i in self.falling_block:
                     self.board_state[i] = state#print something exist  
                 self.falling_class -= 1
-            
+                
+                
+    #call Move() to move block        
     def Move(self, lorr):
-        #print(self.board_state)
+        # tmp store the place you'd like to move, and then we will check if it is ok or not
         tmp = []
-        flag = False
+        flag = False#flag to check if block hit or not
+        
         if lorr == 1:#right
         #check hit
             for x in self.falling_block:
-                var = x + 1
-                place = var % 8
+                var = x + 1#the place we check for block hit
+                place = var % 8#the place we check for boarder hit
                 if (place == 0) or (self.frozen_board[var] != 0):
                     flag = True
-                    break#hit boarder, do nothing 
+                    break#hit boarder or blocks, do nothing 
                 else:
-                    tmp.append(var)                
+                    tmp.append(var)#add next place into tmp               
                     
         elif lorr == -1:#left
             #check hit
@@ -710,28 +718,29 @@ class GameModel(Model):
         else:
             return
                     
-        if not flag:
+        if not flag:# not hit, so move it to next place
             self.falling_block = tmp
-        self.board_state = self.frozen_board[:]
+        self.board_state = self.frozen_board[:]#store frozen block into view board
         
+        #add all falling block into view board
         state = int(self.falling_class / 10)
         for blc in self.falling_block:
             self.board_state[blc] = state
-        #print(self.board_state)
-            
+    
+    #check if block frozen or not        
     def Check_Frozen(self, temp):
-        flag = False
+        flag = False#flag to check if the place is hitting(then the falling block need to frozen) or not
         for i in temp:
             try:
                 #hit block
                 if self.frozen_board[i] != 0:
                     flag = True
                     break
-            #hit boarder
+            #hit lower boarder
             except:
                 flag = True
                 break
-        if flag:
+        if flag:#hit and store falling block into frozen board
             state = int(self.falling_class / 10)
             for blc in self.falling_block:
                 self.frozen_board[blc] = state
@@ -740,43 +749,45 @@ class GameModel(Model):
         else:
             return False
     
-               
+    #check if you got some row full and get points           
     def Check_Erase(self):
-        erase_number = 0
-        erase_row_start = []
-        temp_board = self.frozen_board[:]
+        erase_number = 0# number of row you erase
+        erase_row_start = []#store row start
+        temp_board = self.frozen_board[:]# store frozen into tmp to check erase
         state = int(self.falling_class / 10)
         for blc in self.falling_block:
             temp_board[blc] = state
             
-        i = 0
+        i = 0#row num
         flag = False
         for i in range(15):
-            j = 0
+            j = 0#col num
             flag = False
             for j in range(8):
                 plc = i * 8 + j
                 if temp_board[plc] == 0:
-                    flag = True#empty board at row exist
+                    flag = True#empty board at row exist, then swap to next row to check
                     break
+                
             #store erase row
             if not flag:
                 erase_number += 1
                 erase_row_start.append(i * 8)
-                
+        
+        #type of erasing row        
         if erase_number == 1:
             s = erase_row_start[0]
             i = s - 1
-            while i >= 0:
+            while i >= 0:#block swap down for different distance
                 tmp = temp_board[i]
                 temp_board[i + 8] = tmp
                 i -= 1
             bu = 0
-            while bu < 8:
+            while bu < 8:# add empty to top
                 temp_board[bu] = 0
                 bu += 1
             
-            self.point += 10
+            self.point += 10#add points
                 
         elif erase_number == 2:
             s_1 = erase_row_start[1]
@@ -870,25 +881,23 @@ class GameModel(Model):
         else:
             return
         
-        self.frozen_board = temp_board[:]
-
+        self.frozen_board = temp_board[:]# store the board after erased into frozen
+    #new block initiate
     def New_Block(self):
         self.falling_class = random.choice([10, 11, 20, 21, 30, 31, 32, 33, 40, 41, 42, 43, 50, 51, 52, 53, 60, 70, 71])
-        
         self.falling_block = brick_dict[self.falling_class]
         
         for i in self.falling_block:
-            if not (self.frozen_board[i] == 0):# die
+            if not (self.frozen_board[i] == 0):# create block and hit at the same time -> die
                 return False
             
         state = int(self.falling_class / 10)
         for x in self.falling_block:
-            self.board_state[x] = state#print something exist
+            self.board_state[x] = state#store into view board
         return True
             
     
     def Fall_Down(self):
-        #print(self.board_state)
         temp = []#next place
         temp.append(self.falling_block[0] + 8)
         temp.append(self.falling_block[1] + 8)
@@ -896,17 +905,17 @@ class GameModel(Model):
         temp.append(self.falling_block[3] + 8)
         
         #hit
-        if self.Check_Frozen(temp):#T hit , F not hit
-            self.Check_Erase()
-            self.board_state = self.frozen_board[:]
-            return self.New_Block()
+        if self.Check_Frozen(temp):#check if next place would hit something or not, (T hit , F not hit)
+            self.Check_Erase()# if we hit something, and then we need to check if some row is full or not
+            self.board_state = self.frozen_board[:]#Only store the frozen board into view board, the falling is store into frozen exactly
+            return self.New_Block()# call new block and check if you still alive or not
         
         #not hit
         else:
             #delete privious falling block, add frozen
             self.board_state = self.frozen_board[:]
             
-            #move down    
+            #move down
             self.falling_block = temp
             state = int(self.falling_class / 10)
             for i in self.falling_block:
