@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 26 21:37:58 2017
 
-@author: vincentS
-"""
 import view
 import model
 import tkinter
 import time
 
 class Control():    
-    #state {NULL, IDLE, PLAY, CHECK, SET, PAUSE, OVER}
+    
     def __init__(self):
         self.root = tkinter.Tk()
         self.root.title("Tetris")
@@ -20,7 +16,7 @@ class Control():
         self.input = False
         self.state = "NULL"
         
-        #self.start()
+        
     def gameinput(self, event):
         if event == "LEFT":
             self.model.Move()
@@ -46,9 +42,9 @@ class Control():
     def start(self):
         
         self.setstate("IDLE")
-        #print("IDLE")
+        
         while True:
-            #print(self.state)
+            
         
             button = self.getbuttoninput()
             if self.state != button:
@@ -61,11 +57,10 @@ class Control():
                 
             elif self.state == "PLAY":  
                 timepass = float(time.time()-timer)
-                #print(timer)
-                print (timepass)
+                
                 
                 if timepass > (0.5): #掉落計時器
-                    #s(self.model.frozen_board)
+                    
                     if self.model.Fall_Down():                        
                         timer = time.time()
                         self.view.updateGame()
@@ -91,10 +86,7 @@ class Control():
                             self.model.Move(1)
                         self.view.clear_key()
                     self.view.updateGame()
-                #if self.getkeyinput()!="NULL":
-                   # self.model.move()
-               # if not self.model.Play():
-                  #  self.setstate("OVER")
+               
             elif self.state == "SET":#更改使用viewclass
                 if self.viewflag != self.view.viewflag:
                     print("nowchange" + str(self.viewflag))
