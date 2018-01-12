@@ -49,6 +49,7 @@ class Control():
         #print("IDLE")
         while True:
             #print(self.state)
+        
             button = self.getbuttoninput()
             if self.state != button:
                 self.setstate(button)
@@ -56,11 +57,12 @@ class Control():
                     timer = time.time()
                 if button == ("IDLE"):
                     self.model.__init__()
-                    self.view.mod = self.model
+                    self.view.__init__(self.root, self.model) 
                 
             elif self.state == "PLAY":  
                 timepass = float(time.time()-timer)
-                #print (timepass)
+                #print(timer)
+                print (timepass)
                 
                 if timepass > (0.5): #掉落計時器
                     #s(self.model.frozen_board)
@@ -116,6 +118,7 @@ class Control():
                         self.view = view.View4(self.root,self.model)
                         self.viewflag = 4
                         print ("viewflag"+str(self.viewflag))
+            
             self.root.update()
 
 c=Control()
