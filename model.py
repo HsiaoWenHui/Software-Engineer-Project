@@ -66,9 +66,12 @@ class GameModel(Model):
     def Turn(self):
         temp_Falling = copy.deepcopy(self.falling_block) #複製原始block位置
         outCheck = True
+        #判斷型別
         if self.falling_class == 10 :
+            #判斷無法旋轉的位置
             if(temp_Falling[0] % 8 == 0):
                 outCheck = False
+            #若可以旋轉的實際位置
             temp_Falling[1] = temp_Falling[1] - 7
             temp_Falling[2] = temp_Falling[2] - 2
             temp_Falling[3] = temp_Falling[3] - 9
@@ -95,11 +98,16 @@ class GameModel(Model):
                         
             #若沒有撞到frozen或是邊緣則可進行旋轉
             if(outCheck):
+                #將板子跟冷凍版同步
                 self.board_state = list(self.frozen_board)
+                #將複製版複製回真實運作中的
                 self.falling_block = list(temp_Falling)
+                #算出是哪一種
                 state = int(self.falling_class / 10)
+                #把位置填上是哪一種型態
                 for i in self.falling_block:
-                    self.board_state[i] = state#print something exist  
+                    self.board_state[i] = state#print something exist
+                #改變板子編號
                 self.falling_class += 1
             
             
